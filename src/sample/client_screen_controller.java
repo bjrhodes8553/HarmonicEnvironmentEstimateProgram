@@ -12,12 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-
-import static java.awt.Color.getColor;
 import static java.lang.Double.parseDouble;
 
 public class client_screen_controller {
@@ -168,14 +162,85 @@ public class client_screen_controller {
 
     @FXML
     void update_client(MouseEvent event) throws ClassNotFoundException, SQLException {
-        String job_name = txtfield_job_name.getText();
-        String customer = txtfield_customer.getText();
-        String representative = txtarea_rep.getText();
-        String project_manager = txtarea_proj_mgr.getText();
-        String estimator = txtarea_estimator.getText();
-        String job_notes = txtarea_job_notes.getText();
-        String private_notes = txtarea_private_notes.getText();
-        String conflicts = txtarea_conflicts.getText();
+        String job_name = "";
+        String customer = "";
+        String representative = "";
+        String project_manager = "";
+        String estimator = "";
+        String job_notes = "";
+        String private_notes = "";
+        String conflicts = "";
+
+
+        if(txtfield_job_name.getText()!=null){
+            job_name = txtfield_job_name.getText();
+            txtfield_job_name.clear();
+            label_job_name.setTextFill(Color.GREEN);
+        }
+        else {
+            System.out.println("Job Name was not updated");
+        }
+        if(txtfield_customer.getText() != null){
+            customer = txtfield_customer.getText();
+            txtfield_customer.clear();
+            label_customer.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Customer was not updated");
+        }
+        if(txtarea_rep.getText() != null){
+            representative = txtarea_rep.getText();
+            txtarea_rep.clear();
+            label_rep.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Representative was not updated");
+        }
+        if(txtarea_proj_mgr.getText() != null){
+            project_manager = txtarea_proj_mgr.getText();
+            txtarea_proj_mgr.clear();
+            label_proj_mgr.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Project manager was not updated");
+        }
+        if(txtarea_estimator.getText()!=null){
+            estimator = txtarea_estimator.getText();
+            txtarea_estimator.clear();
+            label_estimator.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Estimator was not updated");
+        }
+        if(txtarea_job_notes.getText() != null){
+            job_notes = txtarea_job_notes.getText();
+            txtarea_job_notes.clear();
+            label_job_notes.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Job notes were not updated");
+        }
+        if(txtarea_private_notes.getText() != null){
+            private_notes = txtarea_private_notes.getText();
+            txtarea_private_notes.clear();
+            label_private_notes.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Private notes were not updated");
+        }
+        if(txtarea_conflicts.getText() != null){
+            conflicts = txtarea_conflicts.getText();
+            txtarea_conflicts.clear();
+            label_conflicts.setTextFill(Color.GREEN);
+
+        }
+        else{
+            System.out.println("Conflicts were not updated");
+        }
+
+
+
+
         int client_id = 0;
         Main.current_client = new Harmonic_Client(
                 client_id,
@@ -187,8 +252,6 @@ public class client_screen_controller {
                 job_notes,
                 private_notes,
                 conflicts);
-
-
 
 
 
@@ -216,7 +279,7 @@ public class client_screen_controller {
                 Main.current_client.setClient_id(rs.getInt("MAX(client_id)")+1);
             }
             int clientID = Main.current_client.getClient_id();
-            Main.current_project.setClient_id(clientID);
+
 
             pst.setString(1, job_name);
             pst.setString(2, customer);
@@ -234,25 +297,16 @@ public class client_screen_controller {
             System.out.println(ex);
         }
         //Clear text fields and text areas after update button pressed
-        txtfield_job_name.clear();
-        txtfield_customer.clear();
-        txtarea_rep.clear();
-        txtarea_proj_mgr.clear();
-        txtarea_estimator.clear();
-        txtarea_job_notes.clear();
-        txtarea_private_notes.clear();
-        txtarea_conflicts.clear();
+
+
+
+
+
+
+
+
         con.close();
 
-        //Change Labels to green
-        label_customer.setTextFill(Color.GREEN);
-        label_rep.setTextFill(Color.GREEN);
-        label_proj_mgr.setTextFill(Color.GREEN);
-        label_estimator.setTextFill(Color.GREEN);
-        label_job_name.setTextFill(Color.GREEN);
-        label_job_notes.setTextFill(Color.GREEN);
-        label_private_notes.setTextFill(Color.GREEN);
-        label_conflicts.setTextFill(Color.GREEN);
 
         //Repopulate text areas with information and an updated message
         txtfield_job_name.setPromptText(job_name);
@@ -330,9 +384,59 @@ public class client_screen_controller {
     @FXML
     void update_shipment(MouseEvent event) {
 
+
     }
     void initialize(){
-        txtfield_project_due.appendText(Main.current_project.getDue_date());
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
+
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT * FROM harmonic_client" +
+                    " WHERE client_id ="+Main.current_client.getClient_id());
+            while(rs.next()) {
+                String project_name = rs.getString(1);
+                String customer = rs.getString(2);
+                String representative = rs.getString(3);
+                String project_manager = rs.getString(4);
+                String estimator = rs.getString(5);
+                String job_notes = rs.getString(6);
+                String private_notes = rs.getString(7);
+                String conflicts = rs.getString(8);
+
+
+                Harmonic_Client current_client = new Harmonic_Client(
+                        Main.current_client.getClient_id(),
+                        project_name,
+                        customer,
+                        representative,
+                        project_manager,
+                        estimator,
+                        job_notes,
+                        private_notes,
+                        conflicts);
+
+                txtfield_job_name.setPromptText(project_name);
+                txtfield_customer.appendText(customer);
+                txtarea_rep.appendText(representative);
+                txtarea_proj_mgr.appendText(project_manager);
+                txtarea_estimator.appendText(estimator);
+                txtarea_job_notes.appendText(job_notes);
+                txtarea_private_notes.appendText(private_notes);
+                txtarea_conflicts.appendText(conflicts);
+
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+
+        txtfield_project_due.appendText(Main.current_project.getDue_date()
+
+
+        );
     }
 
 }

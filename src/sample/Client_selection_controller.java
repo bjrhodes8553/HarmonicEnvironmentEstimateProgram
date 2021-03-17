@@ -1,65 +1,43 @@
 package sample;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-
-import java.awt.event.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 
 public class Client_selection_controller {
 
     @FXML
-    private Button button_new_client;
+    private TableView<?> tblview_client;
 
     @FXML
-    private Button button_client_one;
+    private TableColumn<?, ?> col_client;
 
     @FXML
-    private Button button_client_two;
+    private TableColumn<?, ?> col_project;
 
     @FXML
-    private Button button_client_three;
+    private Button button_go_to_account;
 
     @FXML
-    private Button button_client_four;
+    private Label label_users_name;
 
     @FXML
-    private Button button_client_five;
+    void go_to_account(MouseEvent event) {
+        Harmonic_Client current_client = new Harmonic_Client(1,
+                "Wine Room",
+                "Number One Hotel Inc. 111 One Street, Suite 1, One City, FL 11111",
+                "Harmonic Environments Chris Fletcher Hialeah, FL",
+                "EMJAC Chris Fletcher [Ext. 226]", "EMJAC Chris Fletcher [Ext. 226]",
+                "These notes are viewable by the client.",
+                "These notes are not viewable by the client.",
+                "These are the conflicts");
+        Main.current_client = current_client;
+        System.out.println("Accessing client 1..");
+        Main.createNewScene(event, "client_screen.fxml");
 
-    @FXML
-    void create_new_client(ActionEvent event) {
-      //  Main.createNewScene(event, "client_screen.fxml");
-
-    }
-
-    @FXML
-    void get_client_five(ActionEvent event) {
-     //   Main.createNewScene(event, "client_screen.fxml");
-
-    }
-
-    @FXML
-    void get_client_four(ActionEvent event) {
-       // Main.createNewScene(event, "client_screen.fxml");
-
-    }
-
-    @FXML
-    void get_client_one(ActionEvent event) {
-    //    Main.createNewScene(event, "client_screen.fxml");
-
-    }
-
-    @FXML
-    void get_client_three(ActionEvent event) {
-     //   Main.createNewScene(event, "client_screen.fxml");
-
-    }
-
-    @FXML
-    void get_client_two(ActionEvent event) {
-   //     Main.createNewScene(event, "client_screen.fxml");
 
     }
 

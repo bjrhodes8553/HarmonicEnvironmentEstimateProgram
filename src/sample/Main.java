@@ -18,7 +18,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("client_screen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Login_screen.fxml"));
         primaryStage.setTitle("Harmonic Environment Estimator");
         primaryStage.setScene(new Scene(root, 710, 620));
         primaryStage.show();
@@ -29,9 +29,8 @@ public class Main extends Application {
         launch(args);
     }
 
-
-  /*  public static void createNewScene(ActionEvent event, String newFileFXML) {
-        Parent newRoot = null;
+    public static void createNewScene(Event event, String newFileFXML){
+     Parent newRoot = null;
         try {
             newRoot = FXMLLoader.load(Main.class.getResource(newFileFXML));
         } catch (IOException e) {
@@ -43,6 +42,6 @@ public class Main extends Application {
         window.setScene(newScene);
         window.show();
 }
-*/
+
 
 }
