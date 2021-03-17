@@ -1,5 +1,7 @@
 package sample;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -18,26 +20,33 @@ public class Login_controller {
     private Button btn_login;
 
     @FXML
-    void login(MouseEvent event) {
+    void login(MouseEvent event) throws SQLException {
         String username = "";
         String password = "";
+        Database_Accessor accessor = new Database_Accessor();
+        ResultSet rs;
 
-
-        if(txtfield_username.getText() != null){
-            username = txtfield_username.getText();
-            txtfield_username.clear();
+        if(txtfield_username.getText() == null || txtfield_password.getText() == null){
+            System.out.println("Please enter a correct username and password");
         }else{
-            System.out.println("Please enter a correct username");
-        }
-        if(txtfield_password.getText()!= null){
+            username = txtfield_username.getText();
             password = txtfield_password.getText();
+            txtfield_username.clear();
             txtfield_password.clear();
-        }
-        else{
-            System.out.println("Please enter a correct password");
-        }
-        Main.createNewScene(event, "Client_selection_screen.fxml");
+            rs = accessor.access_database("SELECT username, password FROM "
+                + "login");
+            while (rs.next()){
+                String user = rs.getString("username");
+                String pass = rs.getString("password");
 
+                if (username.equalsIgnoreCase(user) && password.equals(pass)){
+                    System.out.println("Logging In...");
+                    Main.createNewScene(event, "Client_selection_screen.fxml");
+                }
+                else {
+                    System.out.println("Incorrect username or password.");
+                }
+            }
+        }
     }
-
 }
