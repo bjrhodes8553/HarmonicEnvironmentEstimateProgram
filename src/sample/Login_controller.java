@@ -41,7 +41,7 @@ public class Login_controller {
 
                 if (username.equalsIgnoreCase(user) && password.equals(pass)){
                     System.out.println("Logging In...");
-                    Main.createNewScene(event, "Client_selection_screen.fxml");
+                    Main.createNewScene(event, "Existing_client_table_screen.fxml");
                 }
                 else {
                     System.out.println("Incorrect username or password.");

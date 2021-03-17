@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 
-public class Client_selection_controller {
+public class Existing_client_table_controller {
 
     @FXML
     private TableView<?> tblview_client;
