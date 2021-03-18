@@ -1,5 +1,6 @@
 package sample;
 
+import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.Client;
 import com.mysql.cj.xdevapi.Table;
 import java.awt.SystemTray;
@@ -38,36 +39,6 @@ public class Existing_client_table_controller implements Initializable {
     @FXML
     private Label label_users_name;
 
-    private ObservableList<ClientProjectThing> list;
-
-    Database_Accessor accessor;
-
-/*    @FXML
-    public void initialize(URL url, ResourceBundle resourceBundle){
-        col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing, String>("Client"));
-        col_project.setCellValueFactory(new PropertyValueFactory<ClientProjectThing, String>("Project"));
-        buildData();
-    }
-
-    public void buildData(){
-        list = FXCollections.observableArrayList();
-        try{
-            String query = "SELECT customer, project_name FROM harmonic_client";
-            String client;
-            String project;
-            ResultSet rs = accessor.access_database(query);
-            while (rs.next()){
-                client = rs.getString("customer");
-                project = rs.getString("project_name");
-                ClientProjectThing cpt = new ClientProjectThing(client, project);
-                list.add(cpt);
-            }
-            tblview_client.setItems(list);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }*/
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
@@ -91,33 +62,51 @@ public class Existing_client_table_controller implements Initializable {
         while (rs.next()){
             String client = rs.getString("customer");
             String project = rs.getString("project_name");
-            System.out.println("KILL ME");
-            System.out.println(client);
-            System.out.println(project);;
             clientProjectArrayList.add(new ClientProjectThing(client, project));
-            System.out.println(clientProjectArrayList);
         }
         clientProjectList =
             FXCollections.observableArrayList(clientProjectArrayList);
-        System.out.println("List:");
-        System.out.println(clientProjectList);
         return clientProjectList;
     }
 
 
     @FXML
-    void go_to_account(MouseEvent event) {
-        Harmonic_Client current_client = new Harmonic_Client(1,
-                "Wine Room",
-                "Number One Hotel Inc. 111 One Street, Suite 1, One City, FL 11111",
-                "Harmonic Environments Chris Fletcher Hialeah, FL",
-                "EMJAC Chris Fletcher [Ext. 226]", "EMJAC Chris Fletcher [Ext. 226]",
-                "These notes are viewable by the client.",
-                "These notes are not viewable by the client.",
-                "These are the conflicts");
+    void go_to_account(MouseEvent event) throws SQLException {
+        System.out.println("We're here");
+        ClientProjectThing cpt = tblview_client.getSelectionModel().getSelectedItem();
+        System.out.println("Now we're here");
+        Database_Accessor accessor = new Database_Accessor();
+        String query = "SELECT * FROM "
+            + "harmonic_client WHERE customer = '" + cpt.getClient() + "' AND "
+            + "project_name = '" + cpt.getProject() + "'";
+        int clientID = 0;
+        String projectName = "", customer = "", representative = "",
+            projectManager = "", estimator = "", jobNotes = "",
+            privateNotes = "", conflicts = "";
+
+        System.out.println("Client: " + cpt.getClient());
+        System.out.println("Project: " + cpt.getProject());
+        System.out.println("Query: " + query);
+        ResultSet rs = accessor.access_database(query);
+        System.out.println("ughhh now we're here");
+        System.out.println(rs);
+        while (rs.next()){
+            clientID = rs.getInt("client_id");
+            projectName = rs.getString("project_name");
+            customer = rs.getString("customer");
+            representative = rs.getString("representative");
+            projectManager = rs.getString("project_manager");
+            estimator = rs.getString("estimator");
+            jobNotes = rs.getString("job_notes");
+            privateNotes = rs.getString("private_notes");
+            conflicts = rs.getString("conflicts");
+        }
+        Harmonic_Client current_client = new Harmonic_Client(clientID,
+            projectName, customer,
+                representative, projectManager, estimator, jobNotes,
+                privateNotes, conflicts);
         Main.current_client = current_client;
-        System.out.println("Accessing client 1..");
+        System.out.println("Accessing client " + clientID + "...");
         Main.createNewScene(event, "client_screen.fxml");
     }
-
 }

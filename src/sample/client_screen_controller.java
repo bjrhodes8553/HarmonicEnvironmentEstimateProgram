@@ -1,6 +1,12 @@
 package sample;
 
+import java.applet.Applet;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -14,16 +20,40 @@ import javafx.scene.paint.Color;
 import java.sql.*;
 import static java.lang.Double.parseDouble;
 
-public class client_screen_controller {
+public class client_screen_controller implements Initializable {
+
     Connection con;
     PreparedStatement pst;
     String testID;
+    Harmonic_Client current_client;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        choicebox_quote_type.setItems(FXCollections.observableArrayList(
+            "Type A", "Type B", "Type C"
+        ));
+        choicebox_freight_company.setItems(FXCollections.observableArrayList(
+            "Taylor", "Swift", "Warner"
+        ));
+        choicebox_quote_status.setItems(FXCollections.observableArrayList(
+            "On Time", "Delayed", "Ahead of Time", "Pending"
+        ));
+        current_client = Main.current_client;
+        txtfield_job_name.setText(current_client.getJob_name());
+        txtfield_customer.setText(current_client.getCustomer());
+        txtarea_rep.setText(current_client.getRepresentative());
+        txtarea_proj_mgr.setText(current_client.getProject_manager());
+        txtarea_estimator.setText(current_client.getEstimator());
+        txtarea_job_notes.setText(current_client.getJob_notes());
+        txtarea_private_notes.setText(current_client.getPrivate_notes());
+        txtarea_conflicts.setText(current_client.getConflicts());
+    }
 
     @FXML
-    private ChoiceBox<?> choicebox_quote_type;
+    private ChoiceBox choicebox_quote_type;
 
     @FXML
-    private ChoiceBox<?> choicebox_quote_status;
+    private ChoiceBox choicebox_quote_status;
 
     @FXML
     private TextArea txtarea_status_reason;
@@ -107,7 +137,7 @@ public class client_screen_controller {
     private TextField txtfield_shipping_zip;
 
     @FXML
-    private ChoiceBox<?> choicebox_freight_company;
+    private ChoiceBox choicebox_freight_company;
 
     @FXML
     private TextArea txtarea_freight_cost;
@@ -142,22 +172,19 @@ public class client_screen_controller {
     @FXML
     private Label label_cubic_feet;
 
+
     @FXML
     void add_additional_weight(MouseEvent event) {
-
     }
 
     @FXML
     void add_revision(MouseEvent event) {
         label_original_quote_date.setText("03/15/2019");
-
-
     }
 
     @FXML
     void generate_volume(MouseEvent event) {
         label_cubic_feet.setText("1000");
-
     }
 
     @FXML
@@ -438,5 +465,4 @@ public class client_screen_controller {
 
         );
     }
-
 }
