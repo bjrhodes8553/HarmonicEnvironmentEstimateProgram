@@ -109,6 +109,8 @@ public class client_screen_controller implements Initializable {
     @FXML
     private Button button_update_client;
 
+    @FXML Button button_add_client;
+
     @FXML
     private Label label_original_quote_date;
 
@@ -188,7 +190,8 @@ public class client_screen_controller implements Initializable {
     }
 
     @FXML
-    void update_client(MouseEvent event) throws ClassNotFoundException, SQLException {
+    void add_client(MouseEvent event) throws ClassNotFoundException, SQLException {
+        System.out.println("Add button pressed!");
         String job_name = "";
         String customer = "";
         String representative = "";
@@ -199,6 +202,154 @@ public class client_screen_controller implements Initializable {
         String conflicts = "";
 
 
+        if(txtfield_job_name.getText()!=null){
+            job_name = txtfield_job_name.getText();
+            txtfield_job_name.clear();
+            label_job_name.setTextFill(Color.GREEN);
+        }
+        else {
+            System.out.println("Job Name was not added");
+        }
+        if(txtfield_customer.getText() != null){
+            customer = txtfield_customer.getText();
+            txtfield_customer.clear();
+            label_customer.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Customer was not added");
+        }
+        if(txtarea_rep.getText() != null){
+            representative = txtarea_rep.getText();
+            txtarea_rep.clear();
+            label_rep.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Representative was not added");
+        }
+        if(txtarea_proj_mgr.getText() != null){
+            project_manager = txtarea_proj_mgr.getText();
+            txtarea_proj_mgr.clear();
+            label_proj_mgr.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Project manager was not added");
+        }
+        if(txtarea_estimator.getText()!=null){
+            estimator = txtarea_estimator.getText();
+            txtarea_estimator.clear();
+            label_estimator.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Estimator was not added");
+        }
+        if(txtarea_job_notes.getText() != null){
+            job_notes = txtarea_job_notes.getText();
+            txtarea_job_notes.clear();
+            label_job_notes.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Job notes were not added");
+        }
+        if(txtarea_private_notes.getText() != null){
+            private_notes = txtarea_private_notes.getText();
+            txtarea_private_notes.clear();
+            label_private_notes.setTextFill(Color.GREEN);
+        }
+        else{
+            System.out.println("Private notes were not added");
+        }
+        if(txtarea_conflicts.getText() != null){
+            conflicts = txtarea_conflicts.getText();
+            txtarea_conflicts.clear();
+            label_conflicts.setTextFill(Color.GREEN);
+
+        }
+        else{
+            System.out.println("Conflicts were not added");
+        }
+
+        int client_id = 0;
+        Main.current_client = new Harmonic_Client(
+                client_id,
+                job_name,
+                customer,
+                representative,
+                project_manager,
+                estimator,
+                job_notes,
+                private_notes,
+                conflicts);
+
+        try {
+
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
+            pst = con.prepareStatement("INSERT harmonic_client set " +
+                    "project_name = ?," +
+                    "customer = ?," +
+                    "representative = ?," +
+                    "project_manager = ?," +
+                    "estimator= ?," +
+                    "job_notes = ?," +
+                    "private_notes = ?," +
+                    "conflicts = ?");
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select MAX(client_id) from harmonic_client");
+            rs.next();
+            rs.getString("MAX(client_id)");
+            if (rs.getString("MAX(client_id)") == null) {
+                Main.current_client.setClient_id(0);
+            } else {
+                Main.current_client.setClient_id(rs.getInt("MAX(client_id)")+1);
+            }
+            int clientID = Main.current_client.getClient_id();
+
+            pst.setString(1, job_name);
+            pst.setString(2, customer);
+            pst.setString(3, representative);
+            pst.setString(4, project_manager);
+            pst.setString(5, estimator);
+            pst.setString(6, job_notes);
+            pst.setString(7, private_notes);
+            pst.setString(8, conflicts);
+
+            pst.executeUpdate();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }
+        //Clear text fields and text areas after update button pressed
+
+        con.close();
+
+        //Repopulate text areas with information and an updated message
+        txtfield_job_name.setPromptText(job_name);
+        txtfield_customer.appendText(customer);
+        txtarea_rep.appendText(representative);
+        txtarea_proj_mgr.appendText(project_manager);
+        txtarea_estimator.appendText(estimator);
+        txtarea_job_notes.appendText(job_notes);
+        txtarea_private_notes.appendText(private_notes);
+        txtarea_conflicts.appendText(conflicts);
+    }
+
+    @FXML
+    void update_client(MouseEvent event) throws ClassNotFoundException,
+        SQLException {
+        System.out.println("Update button pressed!");
+        System.out.println("Current client: " + Main.current_client.getCustomer());
+        System.out.println("Client ID: " + Main.current_client.getClient_id());
+        String job_name = "";
+        String customer = "";
+        String representative = "";
+        String project_manager = "";
+        String estimator = "";
+        String job_notes = "";
+        String private_notes = "";
+        String conflicts = "";
+
+
+        // Get info from textfields
         if(txtfield_job_name.getText()!=null){
             job_name = txtfield_job_name.getText();
             txtfield_job_name.clear();
@@ -265,48 +416,22 @@ public class client_screen_controller implements Initializable {
             System.out.println("Conflicts were not updated");
         }
 
-
-
-
-        int client_id = 0;
-        Main.current_client = new Harmonic_Client(
-                client_id,
-                job_name,
-                customer,
-                representative,
-                project_manager,
-                estimator,
-                job_notes,
-                private_notes,
-                conflicts);
-
-
-
-
+        // Update
         try {
-
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
-            pst = con.prepareStatement("INSERT harmonic_client set " +
-                    "project_name = ?," +
-                    "customer = ?," +
-                    "representative = ?," +
-                    "project_manager = ?," +
-                    "estimator= ?," +
-                    "job_notes = ?," +
-                    "private_notes = ?," +
-                    "conflicts = ?");
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("select MAX(client_id) from harmonic_client");
-            rs.next();
-            rs.getString("MAX(client_id)");
-            if (rs.getString("MAX(client_id)") == null) {
-                Main.current_client.setClient_id(0);
-            } else {
-                Main.current_client.setClient_id(rs.getInt("MAX(client_id)")+1);
-            }
-            int clientID = Main.current_client.getClient_id();
+            pst = con.prepareStatement("UPDATE harmonic_client set " +
+                "project_name = ?," +
+                "customer = ?," +
+                "representative = ?," +
+                "project_manager = ?," +
+                "estimator= ?," +
+                "job_notes = ?," +
+                "private_notes = ?," +
+                "conflicts = ? " +
+                "WHERE client_id = " + Main.current_client.getClient_id());
 
+            Statement s = con.createStatement();
 
             pst.setString(1, job_name);
             pst.setString(2, customer);
@@ -316,10 +441,7 @@ public class client_screen_controller implements Initializable {
             pst.setString(6, job_notes);
             pst.setString(7, private_notes);
             pst.setString(8, conflicts);
-
-            pst.executeUpdate();
-
-
+            pst.execute();
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }

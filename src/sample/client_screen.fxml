@@ -88,7 +88,12 @@
                         <Font size="11.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="button_update_client" layoutX="115.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#update_client" text="Update " />
+                  <Button fx:id="button_add_client" layoutX="115.0"
+                    layoutY="536.0" mnemonicParsing="false"
+                    onMouseClicked="#add_client" text="Add" />
+                 <Button fx:id="button_update_client" layoutX="150.0"
+                   layoutY="536.0" mnemonicParsing="false"
+                   onMouseClicked="#update_client" text="Update" />
                </children>
             </AnchorPane>
         </content>
