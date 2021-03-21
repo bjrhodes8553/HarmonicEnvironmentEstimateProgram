@@ -37,6 +37,9 @@ public class Existing_client_table_controller implements Initializable {
     private Button button_go_to_account;
 
     @FXML
+    private Button button_add_new_client;
+
+    @FXML
     private Label label_users_name;
 
     @Override
@@ -69,12 +72,14 @@ public class Existing_client_table_controller implements Initializable {
         return clientProjectList;
     }
 
+    @FXML
+    void go_to_new_client(MouseEvent event){
+      Main.createNewScene(event, "client_screen.fxml");
+    }
 
     @FXML
     void go_to_account(MouseEvent event) throws SQLException {
-        System.out.println("We're here");
         ClientProjectThing cpt = tblview_client.getSelectionModel().getSelectedItem();
-        System.out.println("Now we're here");
         Database_Accessor accessor = new Database_Accessor();
         String query = "SELECT * FROM "
             + "harmonic_client WHERE customer = '" + cpt.getClient() + "' AND "
@@ -88,7 +93,6 @@ public class Existing_client_table_controller implements Initializable {
         System.out.println("Project: " + cpt.getProject());
         System.out.println("Query: " + query);
         ResultSet rs = accessor.access_database(query);
-        System.out.println("ughhh now we're here");
         System.out.println(rs);
         while (rs.next()){
             clientID = rs.getInt("client_id");

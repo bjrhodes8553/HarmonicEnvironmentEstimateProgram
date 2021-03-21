@@ -22,6 +22,9 @@
                     </columns>
                   </TableView>
                   <Button fx:id="button_go_to_account" layoutX="54.0" layoutY="232.0" mnemonicParsing="false" onMouseClicked="#go_to_account" text="Go to Account" />
+                 <Button fx:id="button_add_new_client" layoutX="30.0"
+                   layoutY="232.0" mnemonicParsing="false"
+                   onMouseClicked="#go_to_new_client" text="New Client" />
                </children>
             </AnchorPane>
         </content>

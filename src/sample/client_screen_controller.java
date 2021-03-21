@@ -38,15 +38,26 @@ public class client_screen_controller implements Initializable {
         choicebox_quote_status.setItems(FXCollections.observableArrayList(
             "On Time", "Delayed", "Ahead of Time", "Pending"
         ));
-        current_client = Main.current_client;
-        txtfield_job_name.setText(current_client.getJob_name());
-        txtfield_customer.setText(current_client.getCustomer());
-        txtarea_rep.setText(current_client.getRepresentative());
-        txtarea_proj_mgr.setText(current_client.getProject_manager());
-        txtarea_estimator.setText(current_client.getEstimator());
-        txtarea_job_notes.setText(current_client.getJob_notes());
-        txtarea_private_notes.setText(current_client.getPrivate_notes());
-        txtarea_conflicts.setText(current_client.getConflicts());
+
+        // If current_client is null that means they chose "New Client"
+        // If they chose "New Client" then don't populate the textfields
+        if (Main.current_client != null) {
+            current_client = Main.current_client;
+            txtfield_job_name.setText(current_client.getJob_name());
+            txtfield_customer.setText(current_client.getCustomer());
+            txtarea_rep.setText(current_client.getRepresentative());
+            txtarea_proj_mgr.setText(current_client.getProject_manager());
+            txtarea_estimator.setText(current_client.getEstimator());
+            txtarea_job_notes.setText(current_client.getJob_notes());
+            txtarea_private_notes.setText(current_client.getPrivate_notes());
+            txtarea_conflicts.setText(current_client.getConflicts());
+            // disable add new client button, since they're updating not adding
+            button_add_client.setDisable(true);
+        }
+        else {
+            // disable update client button, since they're adding not updating
+            button_update_client.setDisable(true);
+        }
     }
 
     @FXML
@@ -352,7 +363,6 @@ public class client_screen_controller implements Initializable {
         // Get info from textfields
         if(txtfield_job_name.getText()!=null){
             job_name = txtfield_job_name.getText();
-            txtfield_job_name.clear();
             label_job_name.setTextFill(Color.GREEN);
         }
         else {
