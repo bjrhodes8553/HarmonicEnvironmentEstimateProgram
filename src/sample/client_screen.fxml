@@ -37,6 +37,10 @@
                         <ChoiceBox fx:id="choicebox_quote_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Status Reason:" GridPane.rowIndex="2" />
                         <TextArea fx:id="txtarea_status_reason" prefHeight="200.0" prefWidth="200.0" promptText="Delayed by Manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                       <Button fx:id="update_quote" GridPane.columnIndex="0"
+                         GridPane.rowIndex="3"
+                         mnemonicParsing="false"
+                          text="Update" onMouseClicked="#update_quote" />
                      </children>
                   </GridPane>
                </children>

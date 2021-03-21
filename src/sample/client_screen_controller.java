@@ -597,4 +597,48 @@ public class client_screen_controller implements Initializable {
 
         );
     }
+
+    public void update_quote(MouseEvent event) {
+        String quoteType =
+            choicebox_quote_type.getSelectionModel().getSelectedItem().toString();
+        String quoteStatus =
+            choicebox_quote_status.getSelectionModel().getSelectedItem().toString();
+        String statusReason = txtarea_status_reason.getText();
+
+        System.out.println("Quote type: " + quoteType);
+        System.out.println("Quote status: " + quoteStatus);
+        System.out.println("Status reason: " + statusReason);
+
+        // TO-DO Get the update button to work!
+        // Issue: project_id doesn't have default value.
+/*        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
+            pst = con.prepareStatement("INSERT quote set " +
+                "project_id = ?," +
+                "type = ?," +
+                "status = ?," +
+                "status_reason = ?");
+*//*          Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("select MAX(client_id) from harmonic_client");
+            rs.next();
+            rs.getString("MAX(client_id)");
+            if (rs.getString("MAX(client_id)") == null) {
+                Main.current_client.setClient_id(0);
+            } else {
+                Main.current_client.setClient_id(rs.getInt("MAX(client_id)")+1);
+            }
+            int clientID = Main.current_client.getClient_id();*//*
+
+            pst.setString(1, GETPROJECT ID SOMEHOW);
+            pst.setString(2, quoteType);
+            pst.setString(3, quoteStatus);
+            pst.setString(4, statusReason);
+
+            pst.executeUpdate();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
+        }*/
+    }
 }
