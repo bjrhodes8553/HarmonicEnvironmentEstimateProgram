@@ -80,6 +80,7 @@ public class Labor_screen_controller {
     }
 
     public void populate_description(String name) throws SQLException {
+        txtarea_description.clear();
         String description = "";
         Labor current_labor = null;
         Database_Accessor accessor = new Database_Accessor();
@@ -99,12 +100,14 @@ public class Labor_screen_controller {
 
 
     @FXML
-    void edit_description(MouseEvent event) {
+    void edit_description(MouseEvent event) throws SQLException {
+        txtarea_description.clear();
         Database_Accessor accessor = new Database_Accessor();
         String description = txtarea_description.getText();
         accessor.update_database(          "UPDATE labor "
                 + " SET description = '" + description + "'"
                 + " WHERE name = " + Main.current_labor.getName()+"'");
+        populate_description(Main.current_labor.getName());
 
     }
 
