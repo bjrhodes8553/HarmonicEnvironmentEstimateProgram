@@ -118,12 +118,20 @@ public class Materials_screen_controller {
         String name = tblview_materials.getSelectionModel().getSelectedItem().getName();
         accessor.update_database("UPDATE materials"
                 + "SET description = '" + description +
-                 "' WHERE name = '" + name+"'");
+                 " WHERE name = " + name+"'");
+        txtarea_description.clear();
 
     }
 
     @FXML
     void remove_material(MouseEvent event) {
+        Database_Accessor accessor = new Database_Accessor();
+        Material current_material = tblview_materials.getSelectionModel().getSelectedItem();
+        String name = current_material.getName();
+        accessor.update_database("DELETE FROM materials"
+                + " WHERE name = '" + name+"'");
+        tblview_materials.getItems().remove(current_material);
+
 
     }
 
@@ -135,6 +143,7 @@ public class Materials_screen_controller {
 
     @FXML
     void view_desc(MouseEvent event) {
+        txtarea_description.clear();
         Material current_material =  tblview_materials.getSelectionModel().getSelectedItem();
         String material_name = current_material.getName();
         try {

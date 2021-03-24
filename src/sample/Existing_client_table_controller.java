@@ -98,7 +98,6 @@ public class Existing_client_table_controller implements Initializable {
 
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,

@@ -119,6 +119,12 @@ public class Labor_screen_controller {
 
     @FXML
     void remove_labor(MouseEvent event) {
+        Database_Accessor accessor = new Database_Accessor();
+        Labor current_labor = tblview_labor.getSelectionModel().getSelectedItem();
+        String name = current_labor.getName();
+        accessor.update_database("DELETE FROM labor"
+                + " WHERE name = '" + name+"'");
+        tblview_labor.getItems().remove(current_labor);
 
     }
 
