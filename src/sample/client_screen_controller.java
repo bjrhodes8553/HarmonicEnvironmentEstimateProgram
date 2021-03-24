@@ -38,6 +38,9 @@ public class client_screen_controller implements Initializable {
         choicebox_quote_status.setItems(FXCollections.observableArrayList(
             "On Time", "Delayed", "Ahead of Time", "Pending"
         ));
+        choicebox_room_size.setItems(FXCollections.observableArrayList(
+            "Small", "Medium", "Large"
+        ));
 
         // If current_client is null that means they chose "New Client"
         // If they chose "New Client" then don't populate the textfields
@@ -186,6 +189,9 @@ public class client_screen_controller implements Initializable {
 
     @FXML
     private Label label_cubic_feet;
+
+    @FXML
+    private ChoiceBox choicebox_room_size;
 
 
     @FXML
