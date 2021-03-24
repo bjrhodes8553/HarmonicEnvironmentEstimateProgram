@@ -29,6 +29,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
                     </rowConstraints>
                      <children>
                         <Label text="Quote Type:" />
@@ -37,10 +38,7 @@
                         <ChoiceBox fx:id="choicebox_quote_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Status Reason:" GridPane.rowIndex="2" />
                         <TextArea fx:id="txtarea_status_reason" prefHeight="200.0" prefWidth="200.0" promptText="Delayed by Manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                       <Button fx:id="update_quote" GridPane.columnIndex="0"
-                         GridPane.rowIndex="3"
-                         mnemonicParsing="false"
-                          text="Update" onMouseClicked="#update_quote" />
+                       <Button fx:id="update_quote" mnemonicParsing="false" onMouseClicked="#update_quote" text="Update" GridPane.columnIndex="0" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -92,12 +90,8 @@
                         <Font size="11.0" />
                      </font>
                   </TextArea>
-                  <Button fx:id="button_add_client" layoutX="100.0"
-                    layoutY="536.0" mnemonicParsing="false"
-                    onMouseClicked="#add_client" text="Add" />
-                 <Button fx:id="button_update_client" layoutX="160.0"
-                   layoutY="536.0" mnemonicParsing="false"
-                   onMouseClicked="#update_client" text="Update" />
+                  <Button fx:id="button_add_client" layoutX="100.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#add_client" text="Add" />
+                 <Button fx:id="button_update_client" layoutX="160.0" layoutY="536.0" mnemonicParsing="false" onMouseClicked="#update_client" text="Update" />
                </children>
             </AnchorPane>
         </content>
@@ -180,5 +174,6 @@
             </AnchorPane>
         </content>
       </TitledPane>
+      <Button fx:id="btn_go_back" layoutX="571.0" layoutY="569.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Go Back" />
    </children>
 </AnchorPane>

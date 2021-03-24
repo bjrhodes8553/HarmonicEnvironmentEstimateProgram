@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Materials_screen_controller">
+   <children>
+      <TableView fx:id="tblview_materials" layoutX="20.0" layoutY="46.0" prefHeight="291.0" prefWidth="274.0">
+        <columns>
+          <TableColumn fx:id="col_mat_name" prefWidth="111.0" text="Name" />
+          <TableColumn fx:id="col_mat_unit" text="Unit" />
+            <TableColumn fx:id="col_mat_price" prefWidth="82.0" text="Price" />
+        </columns>
+      </TableView>
+      <Button fx:id="btn_remove_material" layoutX="101.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#remove_material" text="Remove Material" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TitledPane animated="false" layoutX="338.0" layoutY="187.0" prefHeight="152.0" prefWidth="229.0" text="Edit Material">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btn_edit_mat" layoutX="86.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#edit_material" text="Update" />
+                  <Label layoutX="14.0" layoutY="14.0" text="Unit:" />
+                  <Label layoutX="13.0" layoutY="46.0" text="Price:" />
+                  <TextField fx:id="txtfield_edit_unit" layoutX="49.0" layoutY="10.0" />
+                  <TextField fx:id="txtfield_edit_price" layoutX="49.0" layoutY="42.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="302.0" layoutY="24.0" prefHeight="152.0" prefWidth="286.0" text="Description of Material">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="136.0" prefWidth="287.0">
+               <children>
+                  <TextArea fx:id="txtarea_description" layoutX="28.0" layoutY="6.0" prefHeight="70.0" prefWidth="229.0" />
+                  <Button fx:id="btn_edit_description" layoutX="185.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#edit_material_description" text="Edit" />
+                  <Button fx:id="btn_view_desc" layoutX="54.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#view_desc" text="View" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Label layoutX="20.0" layoutY="11.0" text="Materials in Database">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_back" layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
+   </children>
+</AnchorPane>

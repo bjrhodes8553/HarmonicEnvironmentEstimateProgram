@@ -15,6 +15,8 @@ public class Main extends Application {
     public static Harmonic_Client current_client;
     public static Project current_project;
     public static Quote current_quote;
+    public static Labor current_labor;
+    public static Material current_material;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

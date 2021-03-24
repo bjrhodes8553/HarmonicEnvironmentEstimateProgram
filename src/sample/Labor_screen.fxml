@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Labor_screen_controller">
+   <children>
+      <Button fx:id="btn_back" layoutX="522.0" layoutY="361.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
+      <TableView fx:id="tblview_labor" layoutX="21.0" layoutY="52.0" prefHeight="277.0" prefWidth="237.0">
+        <columns>
+          <TableColumn fx:id="col_lab_name" prefWidth="113.0" text="Name" />
+          <TableColumn fx:id="col_lab_price" prefWidth="123.0" text="Price/Hour" />
+        </columns>
+      </TableView>
+      <TitledPane animated="false" layoutX="306.0" layoutY="52.0" prefHeight="144.0" prefWidth="250.0" text="Description of Labor">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btn_edit_desciption" layoutX="160.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#edit_description" text="Edit" />
+                  <TextArea fx:id="txtarea_description" layoutX="12.0" layoutY="8.0" prefHeight="64.0" prefWidth="225.0" />
+                  <Button fx:id="btn_view_desc" layoutX="64.0" layoutY="79.0" mnemonicParsing="false" onMouseClicked="#view_desc" text="View" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <TitledPane animated="false" layoutX="306.0" layoutY="212.0" prefHeight="123.0" prefWidth="250.0" text="Edit Labor">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btn_update_labor" layoutX="98.0" layoutY="58.0" mnemonicParsing="false" onMouseClicked="#update_labor" text="Update" />
+                  <Label layoutX="7.0" layoutY="24.0" text="Price/Hour:" />
+                  <TextField fx:id="txtfield_edit_price" layoutX="79.0" layoutY="20.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </TitledPane>
+      <Button fx:id="btn_remove_labor" layoutX="75.0" layoutY="349.0" mnemonicParsing="false" onMouseClicked="#remove_labor" text="Remove Labor" textFill="RED">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="21.0" layoutY="14.0" text="Labor in Database">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

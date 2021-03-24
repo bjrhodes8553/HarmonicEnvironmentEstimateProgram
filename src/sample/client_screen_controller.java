@@ -122,6 +122,8 @@ public class client_screen_controller implements Initializable {
 
     @FXML Button button_add_client;
 
+    @FXML Button btn_go_back;
+
     @FXML
     private Label label_original_quote_date;
 
@@ -464,6 +466,7 @@ public class client_screen_controller implements Initializable {
 
 
 
+
         con.close();
 
 
@@ -477,6 +480,12 @@ public class client_screen_controller implements Initializable {
         txtarea_private_notes.appendText(private_notes);
         txtarea_conflicts.appendText(conflicts);
 
+
+    }
+
+    @FXML
+    void go_back(MouseEvent event){
+        Main.createNewScene(event, "Existing_client_table_screen.fxml");
 
     }
 
