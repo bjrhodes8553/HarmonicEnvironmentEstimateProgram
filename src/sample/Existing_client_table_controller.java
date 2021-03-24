@@ -19,16 +19,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-public class Existing_client_table_controller implements Initializable {
+public class Existing_client_table_controller {
 
     @FXML
     private TableView<ClientProjectThing> tblview_client;
 
     @FXML
-    private TableColumn col_client = new TableColumn("Client");
+    private TableColumn col_client;
 
     @FXML
-    private TableColumn col_project = new TableColumn("Project");
+    private TableColumn col_project;
 
     @FXML
     private Button button_go_to_account;
@@ -98,22 +98,20 @@ public class Existing_client_table_controller implements Initializable {
 
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize() {
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
-            String>("Client"));
+            String>("client"));
         col_project.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
-            String>("Project"));
-        tblview_client.getColumns().addAll(col_client, col_project);
+            String>("project"));
         try {
-            tblview_client.setItems(populateList());
+            tblview_client.getItems().addAll(populateList());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ObservableList populateList() throws SQLException {
-        ObservableList<ClientProjectThing> clientProjectList;
+    public ArrayList populateList() throws SQLException {
         ArrayList clientProjectArrayList = new ArrayList();
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs = accessor.access_database("SELECT customer, "
@@ -123,9 +121,7 @@ public class Existing_client_table_controller implements Initializable {
             String project = rs.getString("project_name");
             clientProjectArrayList.add(new ClientProjectThing(client, project));
         }
-        clientProjectList =
-            FXCollections.observableArrayList(clientProjectArrayList);
-        return clientProjectList;
+        return clientProjectArrayList;
     }
 
     @FXML
