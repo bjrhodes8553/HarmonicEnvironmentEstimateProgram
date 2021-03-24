@@ -85,7 +85,7 @@ public class Labor_screen_controller {
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs = accessor.access_database("SELECT * "
                 +" FROM labor WHERE name = '"
-                + name);
+                + name+"'");
         while (rs.next()){
             String l_name = rs.getString("name");
             double price = rs.getDouble("price_per_hour");
@@ -104,7 +104,7 @@ public class Labor_screen_controller {
         String description = txtarea_description.getText();
         accessor.update_database(          "UPDATE labor "
                 + " SET description = '" + description + "'"
-                + " WHERE name = " + Main.current_labor.getName());
+                + " WHERE name = " + Main.current_labor.getName()+"'");
 
     }
 

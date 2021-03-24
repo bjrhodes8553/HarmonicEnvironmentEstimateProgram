@@ -91,8 +91,8 @@ public class Materials_screen_controller {
         Material current_material = null;
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM material WHERE name = '"
-                + name);
+                +" FROM materials WHERE name = '"
+                + name+"'");
         while (rs.next()){
             String m_name = rs.getString("name");
             String unit = rs.getString("unit");
@@ -116,9 +116,9 @@ public class Materials_screen_controller {
         Database_Accessor accessor = new Database_Accessor();
         String description = txtarea_description.getText();
         String name = tblview_materials.getSelectionModel().getSelectedItem().getName();
-        accessor.update_database("UPDATE materials "
-                + " SET description = '" + description +
-                 "' WHERE name = '" + name);
+        accessor.update_database("UPDATE materials"
+                + "SET description = '" + description +
+                 "' WHERE name = '" + name+"'");
 
     }
 
