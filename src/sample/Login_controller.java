@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import  javafx.scene.text.Text;
 
 public class Login_controller {
 
@@ -20,6 +21,9 @@ public class Login_controller {
     private Button btn_login;
 
     @FXML
+    public Text login_error_text;
+
+    @FXML
     void login(MouseEvent event) throws SQLException {
         String username = "";
         String password = "";
@@ -27,7 +31,7 @@ public class Login_controller {
         ResultSet rs;
 
         if(txtfield_username.getText() == null || txtfield_password.getText() == null){
-            System.out.println("Please enter a correct username and password");
+            login_error_text.setText("Please enter a correct username and password");
         }else{
             username = txtfield_username.getText();
             password = txtfield_password.getText();
@@ -44,7 +48,7 @@ public class Login_controller {
                     Main.createNewScene(event, "Existing_client_table_screen.fxml");
                 }
                 else {
-                    System.out.println("Incorrect username or password.");
+                    login_error_text.setText("Incorrect username or password.");
                 }
             }
         }

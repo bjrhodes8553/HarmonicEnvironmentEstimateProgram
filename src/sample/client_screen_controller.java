@@ -16,7 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
+import javafx.scene.text.Text;
 import java.sql.*;
 import static java.lang.Double.parseDouble;
 
@@ -193,6 +193,45 @@ public class client_screen_controller implements Initializable {
     @FXML
     private ChoiceBox choicebox_room_size;
 
+    @FXML
+    public Text client_info_text;
+
+    @FXML
+    public Text job_name_error_text;
+
+    @FXML
+    public Text customer_error_text;
+
+    @FXML
+    public Text rep_error_text;
+
+    @FXML
+    public Text proj_mgr_error_text;
+
+    @FXML
+    public Text estimator_error_text;
+
+    @FXML
+    public Text job_notes_error_text;
+
+    @FXML
+    public Text pvt_notes_error_text;
+
+    @FXML
+    public Text conflicts_error_text;
+
+    @FXML
+    public Text curr_client_text;
+
+    @FXML
+    public Text client_id_text;
+
+    @FXML
+    public Text dueDate_update_text;
+
+    @FXML
+    public Text quote_text;
+
 
     @FXML
     void add_additional_weight(MouseEvent event) {
@@ -210,7 +249,7 @@ public class client_screen_controller implements Initializable {
 
     @FXML
     void add_client(MouseEvent event) throws ClassNotFoundException, SQLException {
-        System.out.println("Add button pressed!");
+        client_info_text.setText("Add button pressed!");
         String job_name = "";
         String customer = "";
         String representative = "";
@@ -227,7 +266,7 @@ public class client_screen_controller implements Initializable {
             label_job_name.setTextFill(Color.GREEN);
         }
         else {
-            System.out.println("Job Name was not added");
+            job_name_error_text.setText("Job Name was not added");
         }
         if(txtfield_customer.getText() != null){
             customer = txtfield_customer.getText();
@@ -235,7 +274,7 @@ public class client_screen_controller implements Initializable {
             label_customer.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Customer was not added");
+            customer_error_text.setText("Customer was not added");
         }
         if(txtarea_rep.getText() != null){
             representative = txtarea_rep.getText();
@@ -243,7 +282,7 @@ public class client_screen_controller implements Initializable {
             label_rep.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Representative was not added");
+            rep_error_text.setText("Representative was not added");
         }
         if(txtarea_proj_mgr.getText() != null){
             project_manager = txtarea_proj_mgr.getText();
@@ -251,7 +290,7 @@ public class client_screen_controller implements Initializable {
             label_proj_mgr.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Project manager was not added");
+            proj_mgr_error_text.setText("Project manager was not added");
         }
         if(txtarea_estimator.getText()!=null){
             estimator = txtarea_estimator.getText();
@@ -259,7 +298,7 @@ public class client_screen_controller implements Initializable {
             label_estimator.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Estimator was not added");
+            estimator_error_text.setText("Estimator was not added");
         }
         if(txtarea_job_notes.getText() != null){
             job_notes = txtarea_job_notes.getText();
@@ -267,7 +306,7 @@ public class client_screen_controller implements Initializable {
             label_job_notes.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Job notes were not added");
+            job_notes_error_text.setText("Job notes were not added");
         }
         if(txtarea_private_notes.getText() != null){
             private_notes = txtarea_private_notes.getText();
@@ -275,7 +314,7 @@ public class client_screen_controller implements Initializable {
             label_private_notes.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Private notes were not added");
+            pvt_notes_error_text.setText("Private notes were not added");
         }
         if(txtarea_conflicts.getText() != null){
             conflicts = txtarea_conflicts.getText();
@@ -284,7 +323,7 @@ public class client_screen_controller implements Initializable {
 
         }
         else{
-            System.out.println("Conflicts were not added");
+            conflicts_error_text.setText("Conflicts were not added");
         }
 
         int client_id = 0;
@@ -355,9 +394,9 @@ public class client_screen_controller implements Initializable {
     @FXML
     void update_client(MouseEvent event) throws ClassNotFoundException,
         SQLException {
-        System.out.println("Update button pressed!");
-        System.out.println("Current client: " + Main.current_client.getCustomer());
-        System.out.println("Client ID: " + Main.current_client.getClient_id());
+        client_info_text.setText("Update button pressed!");
+        curr_client_text.setText("Current client: " + Main.current_client.getCustomer());
+        client_id_text.setText("Client ID: " + Main.current_client.getClient_id());
         String job_name = "";
         String customer = "";
         String representative = "";
@@ -374,7 +413,7 @@ public class client_screen_controller implements Initializable {
             label_job_name.setTextFill(Color.GREEN);
         }
         else {
-            System.out.println("Job Name was not updated");
+            job_name_error_text.setText("Job Name was not updated");
         }
         if(txtfield_customer.getText() != null){
             customer = txtfield_customer.getText();
@@ -382,7 +421,7 @@ public class client_screen_controller implements Initializable {
             label_customer.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Customer was not updated");
+            customer_error_text.setText("Customer was not updated");
         }
         if(txtarea_rep.getText() != null){
             representative = txtarea_rep.getText();
@@ -390,7 +429,7 @@ public class client_screen_controller implements Initializable {
             label_rep.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Representative was not updated");
+            rep_error_text.setText("Representative was not updated");
         }
         if(txtarea_proj_mgr.getText() != null){
             project_manager = txtarea_proj_mgr.getText();
@@ -398,7 +437,7 @@ public class client_screen_controller implements Initializable {
             label_proj_mgr.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Project manager was not updated");
+            proj_mgr_error_text.setText("Project manager was not updated");
         }
         if(txtarea_estimator.getText()!=null){
             estimator = txtarea_estimator.getText();
@@ -406,7 +445,7 @@ public class client_screen_controller implements Initializable {
             label_estimator.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Estimator was not updated");
+            estimator_error_text.setText("Estimator was not updated");
         }
         if(txtarea_job_notes.getText() != null){
             job_notes = txtarea_job_notes.getText();
@@ -414,7 +453,7 @@ public class client_screen_controller implements Initializable {
             label_job_notes.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Job notes were not updated");
+            job_notes_error_text.setText("Job notes were not updated");
         }
         if(txtarea_private_notes.getText() != null){
             private_notes = txtarea_private_notes.getText();
@@ -422,7 +461,7 @@ public class client_screen_controller implements Initializable {
             label_private_notes.setTextFill(Color.GREEN);
         }
         else{
-            System.out.println("Private notes were not updated");
+            pvt_notes_error_text.setText("Private notes were not updated");
         }
         if(txtarea_conflicts.getText() != null){
             conflicts = txtarea_conflicts.getText();
@@ -431,7 +470,7 @@ public class client_screen_controller implements Initializable {
 
         }
         else{
-            System.out.println("Conflicts were not updated");
+            conflicts_error_text.setText("Conflicts were not updated");
         }
 
         // Update
@@ -620,9 +659,9 @@ public class client_screen_controller implements Initializable {
             choicebox_quote_status.getSelectionModel().getSelectedItem().toString();
         String statusReason = txtarea_status_reason.getText();
 
-        System.out.println("Quote type: " + quoteType);
-        System.out.println("Quote status: " + quoteStatus);
-        System.out.println("Status reason: " + statusReason);
+        quote_text.setText("Quote type: " + quoteType + "\n"
+                + "Quote status: " + quoteStatus + "\n"
+                + "Status reason: " + statusReason);
 
         // TO-DO Get the update button to work!
         // Issue: project_id doesn't have default value.
