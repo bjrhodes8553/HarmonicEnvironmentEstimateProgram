@@ -21,6 +21,9 @@ public class Login_controller {
     private Button btn_login;
 
     @FXML
+    public Button reset_pass_btn;
+
+    @FXML
     public Text login_error_text;
 
     @FXML
@@ -30,7 +33,7 @@ public class Login_controller {
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs;
 
-        if(txtfield_username.getText() == null || txtfield_password.getText() == null){
+        if(txtfield_username.getText().equals("") || txtfield_password.getText().equals("")){
             login_error_text.setText("Please enter a correct username and password");
         }else{
             username = txtfield_username.getText();
@@ -44,7 +47,7 @@ public class Login_controller {
                 String pass = rs.getString("password");
 
                 if (username.equalsIgnoreCase(user) && password.equals(pass)){
-                    System.out.println("Logging In...");
+                    login_error_text.setText("Logging In...");
                     Main.createNewScene(event, "Existing_client_table_screen.fxml");
                 }
                 else {
@@ -52,5 +55,10 @@ public class Login_controller {
                 }
             }
         }
+    }
+
+    @FXML
+    void resetPassword(MouseEvent reset) throws SQLException{
+        Main.createNewScene(reset, "password_reset.fxml");
     }
 }

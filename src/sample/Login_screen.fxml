@@ -21,5 +21,6 @@
       <PasswordField fx:id="txtfield_password" layoutX="194.0" layoutY="159.0" promptText="*******" />
       <Button fx:id="btn_login" layoutX="194.0" layoutY="187.0" mnemonicParsing="false" onMouseClicked="#login" text="Login" />
       <Text fx:id="login_error_text" fill="RED" layoutX="247.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="107.00518798828125" />
+      <Button fx:id="reset_pass_btn" layoutX="191.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#resetPassword" text="Reset Password" />
    </children>
 </AnchorPane>

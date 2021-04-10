@@ -260,70 +260,70 @@ public class client_screen_controller implements Initializable {
         String conflicts = "";
 
 
-        if(txtfield_job_name.getText()!=null){
+        if(txtfield_job_name.getText().equals("")){
+
+            job_name_error_text.setText("Job Name was not added");
+        }
+        else {
             job_name = txtfield_job_name.getText();
             txtfield_job_name.clear();
             label_job_name.setTextFill(Color.GREEN);
         }
-        else {
-            job_name_error_text.setText("Job Name was not added");
+        if(txtfield_customer.getText().equals("")){
+            customer_error_text.setText("Customer was not added");
         }
-        if(txtfield_customer.getText() != null){
+        else{
             customer = txtfield_customer.getText();
             txtfield_customer.clear();
             label_customer.setTextFill(Color.GREEN);
         }
-        else{
-            customer_error_text.setText("Customer was not added");
+        if(txtarea_rep.getText().equals("")){
+            rep_error_text.setText("Representative was not added");
         }
-        if(txtarea_rep.getText() != null){
+        else{
             representative = txtarea_rep.getText();
             txtarea_rep.clear();
             label_rep.setTextFill(Color.GREEN);
         }
-        else{
-            rep_error_text.setText("Representative was not added");
+        if(txtarea_proj_mgr.getText().equals("")){
+            proj_mgr_error_text.setText("Project manager was not added");
         }
-        if(txtarea_proj_mgr.getText() != null){
+        else{
             project_manager = txtarea_proj_mgr.getText();
             txtarea_proj_mgr.clear();
             label_proj_mgr.setTextFill(Color.GREEN);
         }
-        else{
-            proj_mgr_error_text.setText("Project manager was not added");
+        if(txtarea_estimator.getText().equals("")){
+            estimator_error_text.setText("Estimator was not added");
         }
-        if(txtarea_estimator.getText()!=null){
+        else{
             estimator = txtarea_estimator.getText();
             txtarea_estimator.clear();
             label_estimator.setTextFill(Color.GREEN);
         }
-        else{
-            estimator_error_text.setText("Estimator was not added");
+        if(txtarea_job_notes.getText().equals("")){
+            job_notes_error_text.setText("Job notes were not added");
         }
-        if(txtarea_job_notes.getText() != null){
+        else{
             job_notes = txtarea_job_notes.getText();
             txtarea_job_notes.clear();
             label_job_notes.setTextFill(Color.GREEN);
         }
-        else{
-            job_notes_error_text.setText("Job notes were not added");
+        if(txtarea_private_notes.getText().equals("")){
+            pvt_notes_error_text.setText("Private notes were not added");
         }
-        if(txtarea_private_notes.getText() != null){
+        else{
             private_notes = txtarea_private_notes.getText();
             txtarea_private_notes.clear();
             label_private_notes.setTextFill(Color.GREEN);
         }
-        else{
-            pvt_notes_error_text.setText("Private notes were not added");
+        if(txtarea_conflicts.getText().equals("")){
+            conflicts_error_text.setText("Conflicts were not added");
         }
-        if(txtarea_conflicts.getText() != null){
+        else{
             conflicts = txtarea_conflicts.getText();
             txtarea_conflicts.clear();
             label_conflicts.setTextFill(Color.GREEN);
-
-        }
-        else{
-            conflicts_error_text.setText("Conflicts were not added");
         }
 
         int client_id = 0;
@@ -408,69 +408,69 @@ public class client_screen_controller implements Initializable {
 
 
         // Get info from textfields
-        if(txtfield_job_name.getText()!=null){
-            job_name = txtfield_job_name.getText();
-            label_job_name.setTextFill(Color.GREEN);
-        }
-        else {
+        if(txtfield_job_name.getText().equals("")){
             job_name_error_text.setText("Job Name was not updated");
         }
-        if(txtfield_customer.getText() != null){
+        else {
+            job_name = txtfield_job_name.getText();
+            txtfield_job_name.clear();
+            label_job_name.setTextFill(Color.GREEN);
+        }
+        if(txtfield_customer.getText().equals("")){
+            customer_error_text.setText("Customer was not updated");
+        }
+        else{
             customer = txtfield_customer.getText();
             txtfield_customer.clear();
             label_customer.setTextFill(Color.GREEN);
         }
-        else{
-            customer_error_text.setText("Customer was not updated");
+        if(txtarea_rep.getText().equals("")){
+            rep_error_text.setText("Representative was not updated");
         }
-        if(txtarea_rep.getText() != null){
+        else{
             representative = txtarea_rep.getText();
             txtarea_rep.clear();
             label_rep.setTextFill(Color.GREEN);
         }
-        else{
-            rep_error_text.setText("Representative was not updated");
+        if(txtarea_proj_mgr.getText().equals("")){
+            proj_mgr_error_text.setText("Project manager was not updated");
         }
-        if(txtarea_proj_mgr.getText() != null){
+        else{
             project_manager = txtarea_proj_mgr.getText();
             txtarea_proj_mgr.clear();
             label_proj_mgr.setTextFill(Color.GREEN);
         }
-        else{
-            proj_mgr_error_text.setText("Project manager was not updated");
+        if(txtarea_estimator.getText().equals("")){
+            estimator_error_text.setText("Estimator was not updated");
         }
-        if(txtarea_estimator.getText()!=null){
+        else{
             estimator = txtarea_estimator.getText();
             txtarea_estimator.clear();
             label_estimator.setTextFill(Color.GREEN);
         }
-        else{
-            estimator_error_text.setText("Estimator was not updated");
+        if(txtarea_job_notes.getText().equals("")){
+            job_notes_error_text.setText("Job notes were not updated");
         }
-        if(txtarea_job_notes.getText() != null){
+        else{
             job_notes = txtarea_job_notes.getText();
             txtarea_job_notes.clear();
             label_job_notes.setTextFill(Color.GREEN);
         }
-        else{
-            job_notes_error_text.setText("Job notes were not updated");
+        if(txtarea_private_notes.getText().equals("")){
+            pvt_notes_error_text.setText("Private notes were not updated");
         }
-        if(txtarea_private_notes.getText() != null){
+        else{
             private_notes = txtarea_private_notes.getText();
             txtarea_private_notes.clear();
             label_private_notes.setTextFill(Color.GREEN);
         }
-        else{
-            pvt_notes_error_text.setText("Private notes were not updated");
+        if(txtarea_conflicts.getText().equals("")){
+            conflicts_error_text.setText("Conflicts were not updated");
         }
-        if(txtarea_conflicts.getText() != null){
+        else{
             conflicts = txtarea_conflicts.getText();
             txtarea_conflicts.clear();
             label_conflicts.setTextFill(Color.GREEN);
-
-        }
-        else{
-            conflicts_error_text.setText("Conflicts were not updated");
         }
 
         // Update
