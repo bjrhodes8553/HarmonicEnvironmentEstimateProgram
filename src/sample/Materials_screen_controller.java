@@ -75,10 +75,10 @@ public class Materials_screen_controller {
         ResultSet rs = accessor.access_database("SELECT * "
                 +" FROM materials");
         while (rs.next()){
-            String name = rs.getString("name");
+            String name = rs.getString("materialName");
             String unit = rs.getString("unit");
             double price = rs.getDouble("price");
-            String description = rs.getString("description");
+            String description = rs.getString("materialDesc");
             current_material = new Material(name, unit, price, description);
             Main.current_material = current_material;
             material_array_list.add(current_material);
@@ -91,13 +91,12 @@ public class Materials_screen_controller {
         Material current_material = null;
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM materials WHERE name = '"
-                + name+"'");
+                +" FROM materials WHERE materialName = '" + name +"'");
         while (rs.next()){
-            String m_name = rs.getString("name");
+            String m_name = rs.getString("materialName");
             String unit = rs.getString("unit");
             double price = rs.getDouble("price");
-            description = rs.getString("description");
+            description = rs.getString("materialDesc");
             current_material = new Material(m_name, unit, price, description);
         }
         Main.current_material = current_material;
@@ -116,11 +115,9 @@ public class Materials_screen_controller {
         Database_Accessor accessor = new Database_Accessor();
         String description = txtarea_description.getText();
         String name = tblview_materials.getSelectionModel().getSelectedItem().getName();
-        accessor.update_database("UPDATE materials"
-                + "SET description = '" + description +
-                 " WHERE name = " + name+"'");
+        accessor.update_database("UPDATE materials SET materialDesc = '" +
+            description + "' WHERE materialName = '" + name +"'");
         txtarea_description.clear();
-
     }
 
     @FXML
@@ -129,7 +126,7 @@ public class Materials_screen_controller {
         Material current_material = tblview_materials.getSelectionModel().getSelectedItem();
         String name = current_material.getName();
         accessor.update_database("DELETE FROM materials"
-                + " WHERE name = '" + name+"'");
+                + " WHERE materialName = '" + name +"'");
         tblview_materials.getItems().remove(current_material);
 
 
