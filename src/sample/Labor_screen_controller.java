@@ -69,9 +69,9 @@ public class Labor_screen_controller {
         ResultSet rs = accessor.access_database("SELECT * "
                 +" FROM labor");
         while (rs.next()){
-            String name = rs.getString("name");
+            String name = rs.getString("laborName");
             double price = rs.getDouble("price_per_hour");
-            String description = rs.getString("description");
+            String description = rs.getString("laborDesc");
             current_labor = new Labor(name, price, description);
             Main.current_labor = current_labor;
             labor_array_list.add(current_labor);
@@ -84,13 +84,11 @@ public class Labor_screen_controller {
         String description = "";
         Labor current_labor = null;
         Database_Accessor accessor = new Database_Accessor();
-        ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM labor WHERE name = '"
-                + name+"'");
+        ResultSet rs = accessor.access_database("SELECT * FROM labor WHERE laborName = '"+ name + "'");
         while (rs.next()){
-            String l_name = rs.getString("name");
+            String l_name = rs.getString("laborName");
             double price = rs.getDouble("price_per_hour");
-            description = rs.getString("description");
+            description = rs.getString("laborDesc");
             current_labor = new Labor(l_name, price, description);
         }
         Main.current_labor = current_labor;
@@ -101,20 +99,25 @@ public class Labor_screen_controller {
 
     @FXML
     void edit_description(MouseEvent event) throws SQLException {
-        txtarea_description.clear();
         Database_Accessor accessor = new Database_Accessor();
         String description = txtarea_description.getText();
-        accessor.update_database(          "UPDATE labor "
-                + " SET description = '" + description + "'"
-                + " WHERE name = " + Main.current_labor.getName()+"'");
-        populate_description(Main.current_labor.getName());
+        String name = tblview_labor.getSelectionModel().getSelectedItem().getName();
+        accessor.update_database("UPDATE labor SET laborDesc = '" +
+            description + "' WHERE laborName = '" + name +"'");
+        txtarea_description.clear();
 
+        // Old method wasn't working, but I was too scared to delete it, so
+        // it's commented out
+        /*        txtarea_description.clear();
+        Database_Accessor accessor = new Database_Accessor();
+        String description = txtarea_description.getText();
+        accessor.update_database("UPDATE labor SET laborDesc = '" + description + "' WHERE laborName = '" + Main.current_labor.getName() + "'");
+        populate_description(Main.current_labor.getName());*/
     }
 
     @FXML
     void go_back(MouseEvent event) {
         Main.createNewScene(event, "Existing_client_table_screen.fxml");
-
     }
 
     @FXML
@@ -123,7 +126,7 @@ public class Labor_screen_controller {
         Labor current_labor = tblview_labor.getSelectionModel().getSelectedItem();
         String name = current_labor.getName();
         accessor.update_database("DELETE FROM labor"
-                + " WHERE name = '" + name+"'");
+                + " WHERE laborName = '" + name +"'");
         tblview_labor.getItems().remove(current_labor);
 
     }
@@ -142,8 +145,5 @@ public class Labor_screen_controller {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

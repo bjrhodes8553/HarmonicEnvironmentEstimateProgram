@@ -172,7 +172,8 @@ public class Existing_client_table_controller {
         String name = txtfield_lab_name_db.getText();
         double price = Double.parseDouble(txtfield_lab_price_db.getText());
         Database_Accessor accessor = new Database_Accessor();
-        accessor.update_database("INSERT INTO labor(name, price_per_hour) VALUES ('"
+        accessor.update_database("INSERT INTO labor(laborName, "
+            + "price_per_hour) VALUES ('"
                 +name+"', '"+price+"')");
         txtfield_lab_name_db.clear();
         txtfield_lab_price_db.clear();
@@ -185,18 +186,18 @@ public class Existing_client_table_controller {
         String unit = txtfield_mat_unit.getText();
         double price = Double.parseDouble(txtfield_mat_price.getText());
         Database_Accessor accessor = new Database_Accessor();
-        accessor.update_database("INSERT INTO materials(name, unit, price) VALUES ('"
+        accessor.update_database("INSERT INTO materials(materialName, unit, "
+            + "price) VALUES ('"
                 +name+"', '"+unit+"','"+price+"')");
         txtfield_mat_name.clear();
         txtfield_mat_unit.clear();
         txtfield_mat_price.clear();
-
     }
 
     @FXML
     void add_material_to_client(MouseEvent event) {
-
     }
+
     @FXML
     void logout(MouseEvent event) {
         Main.createNewScene(event, "Login_screen.fxml");
@@ -205,14 +206,10 @@ public class Existing_client_table_controller {
     @FXML
     void go_to_materials(MouseEvent event) {
         Main.createNewScene(event, "Materials_screen.fxml");
-
     }
 
     @FXML
     void go_to_labor(MouseEvent event) {
         Main.createNewScene(event, "Labor_screen.fxml");
-
     }
-
-
 }
