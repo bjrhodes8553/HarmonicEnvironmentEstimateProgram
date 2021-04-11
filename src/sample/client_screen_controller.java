@@ -249,7 +249,7 @@ public class client_screen_controller implements Initializable {
 
     @FXML
     void add_client(MouseEvent event) throws ClassNotFoundException, SQLException {
-        client_info_text.setText("Add button pressed!");
+        client_info_text.setText("Added!");
         String job_name = "";
         String customer = "";
         String representative = "";
@@ -394,9 +394,13 @@ public class client_screen_controller implements Initializable {
     @FXML
     void update_client(MouseEvent event) throws ClassNotFoundException,
         SQLException {
-        client_info_text.setText("Update button pressed!");
-        curr_client_text.setText("Current client: " + Main.current_client.getCustomer());
-        client_id_text.setText("Client ID: " + Main.current_client.getClient_id());
+        client_info_text.setText("Updated!");
+        // Commented out because user already knows what client they're on
+        // Also because they don't need to know the ID of their client since
+        // that's exclusively used for database indexing reasons
+        //curr_client_text.setText("Current client: " + Main.current_client
+        // .getCustomer());
+        //.setText("Client ID: " + Main.current_client.getClient_id());
         String job_name = "";
         String customer = "";
         String representative = "";
@@ -531,7 +535,6 @@ public class client_screen_controller implements Initializable {
     @FXML
     void go_back(MouseEvent event){
         Main.createNewScene(event, "Existing_client_table_screen.fxml");
-
     }
 
     void getProject(){
@@ -659,9 +662,7 @@ public class client_screen_controller implements Initializable {
             choicebox_quote_status.getSelectionModel().getSelectedItem().toString();
         String statusReason = txtarea_status_reason.getText();
 
-        quote_text.setText("Quote type: " + quoteType + "\n"
-                + "Quote status: " + quoteStatus + "\n"
-                + "Status reason: " + statusReason);
+        quote_text.setText("Quote Status Updated!");
 
         // TO-DO Get the update button to work!
         // Issue: project_id doesn't have default value.

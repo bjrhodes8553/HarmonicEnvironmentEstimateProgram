@@ -217,8 +217,11 @@
                 </AnchorPane>
             </content>
         </TitledPane>
+        <Button fx:id="btn_go_back" layoutX="571.0" layoutY="569.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <!--
         <Text fx:id="curr_client_text" layoutX="533.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Client:" wrappingWidth="159.19012451171875" />
         <Text fx:id="client_id_text" layoutX="533.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Id:" wrappingWidth="159.19012451171875" />
+        -->
     </children>
 </AnchorPane>
