@@ -126,7 +126,17 @@ public class Existing_client_table_controller {
 
     @FXML
     void go_to_new_client(MouseEvent event){
-      Main.createNewScene(event, "client_screen.fxml");
+        int clientID = 0;
+        String projectName = "", customer = "", representative = "",
+            projectManager = "", estimator = "", jobNotes = "",
+            privateNotes = "", conflicts = "";
+        Harmonic_Client current_client = new Harmonic_Client(clientID,
+            projectName, customer,
+            representative, projectManager, estimator, jobNotes,
+            privateNotes, conflicts);
+        Main.current_client = current_client;
+        System.out.println("Going to new client...");
+        Main.createNewScene(event, "client_screen.fxml");
     }
 
     @FXML
