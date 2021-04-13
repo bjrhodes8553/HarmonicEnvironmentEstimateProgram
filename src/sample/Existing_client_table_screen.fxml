@@ -45,7 +45,7 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="277.0" layoutY="54.0" prefHeight="236.0" prefWidth="241.0" text="Add Material to Client Account">
+      <TitledPane animated="false" layoutX="277.0" layoutY="54.0" prefHeight="236.0" prefWidth="241.0" text="Materials in Clients Account">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="213.0" prefWidth="195.0">
                <children>
@@ -56,11 +56,12 @@
                         <TableColumn fx:id="col_client_material_price" prefWidth="58.0" text="Price" />
                     </columns>
                   </TableView>
-                  <Button fx:id="btn_add_mat_to_client" layoutX="51.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#add_material_to_client" text="Add to Client's Account" />
+                  <Button fx:id="btn_view_client_materials" layoutX="33.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#view_client_materials" text="View" />
+                  <Button fx:id="btn_add_edit_mat" layoutX="137.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#add_edit_client_materials" text="Add/Edit" />
                </children></AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="277.0" layoutY="309.0" prefHeight="219.0" prefWidth="241.0" text="Add Labor to Client Account">
+      <TitledPane animated="false" layoutX="277.0" layoutY="309.0" prefHeight="219.0" prefWidth="241.0" text="Labor in Client's Account">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="204.0" prefWidth="219.0">
                <children>
@@ -70,7 +71,8 @@
                       <TableColumn fx:id="col_client_labor_price" prefWidth="86.0" text="Price/Hour" />
                     </columns>
                   </TableView>
-                  <Button fx:id="btn_add_lab_client" layoutX="60.0" layoutY="156.0" mnemonicParsing="false" text="Add to Client's Account" />
+                  <Button fx:id="btn_view_client_labor" layoutX="34.0" layoutY="154.0" mnemonicParsing="false" text="View" />
+                  <Button fx:id="btn_add_edit_labor" layoutX="133.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#add_edit_client_labor" text="Add/Edit" />
                </children></AnchorPane>
         </content>
       </TitledPane>

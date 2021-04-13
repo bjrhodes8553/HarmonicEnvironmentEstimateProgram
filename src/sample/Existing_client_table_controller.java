@@ -1,20 +1,13 @@
 package sample;
 
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Client;
-import com.mysql.cj.xdevapi.Table;
-import java.awt.SystemTray;
-import java.net.URL;
+//import com.mysql.cj.protocol.Resultset;
+//import com.mysql.cj.xdevapi.Client;
+//import com.mysql.cj.xdevapi.Table;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +33,7 @@ public class Existing_client_table_controller {
     private Label label_users_name;
 
     @FXML
-    private TableView<?> tblview_material_to_client;
+    private TableView<Material> tblview_material_to_client;
 
     @FXML
     private TableColumn<?, ?> col_client_material_name;
@@ -52,9 +45,9 @@ public class Existing_client_table_controller {
     private TableColumn<?, ?> col_client_material_price;
 
     @FXML
-    private Button btn_add_mat_to_client;
+    private Button btn_view_client_materials;
     @FXML
-    private TableView<?> tblview_labor_to_client;
+    private TableView<Labor> tblview_labor_to_client;
 
     @FXML
     private TableColumn<?, ?> col_client_labor_name;
@@ -63,7 +56,7 @@ public class Existing_client_table_controller {
     private TableColumn<?, ?> col_client_labor_price;
 
     @FXML
-    private Button btn_add_lab_client;
+    private Button btn_view_client_labor;
 
     @FXML
     private TextField txtfield_mat_name;
@@ -93,6 +86,13 @@ public class Existing_client_table_controller {
     @FXML
     private Button btn_view_lab;
 
+    @FXML
+    private Button btn_add_edit_mat;
+
+    @FXML
+    private Button btn_add_edit_lab;
+
+
 
 
 
@@ -105,13 +105,14 @@ public class Existing_client_table_controller {
         col_project.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
             String>("project"));
         try {
-            tblview_client.getItems().addAll(populateList());
+            tblview_client.getItems().addAll(populateCLientList());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
-    public ArrayList populateList() throws SQLException {
+    public ArrayList populateCLientList() throws SQLException {
         ArrayList clientProjectArrayList = new ArrayList();
         Database_Accessor accessor = new Database_Accessor();
         ResultSet rs = accessor.access_database("SELECT customer, "
@@ -190,6 +191,45 @@ public class Existing_client_table_controller {
     }
 
 
+    void populate_customer_materials() throws SQLException {
+        Material current_material = null;
+        String mat_name = "";
+        ResultSet rs2 = null;
+        int clientID = 1;
+        col_client_material_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        col_client_material_unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
+        col_client_material_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        ArrayList <Material> material_array_list = new ArrayList<>();
+        Database_Accessor accessor = new Database_Accessor();
+        ClientProjectThing current_client= tblview_client.getSelectionModel().getSelectedItem();
+        String query = "SELECT * FROM "
+                + "harmonic_client WHERE customer = '" + current_client.getClient() + "' AND "
+                + "project_name = '" + current_client.getProject() + "'";
+        ResultSet rs_client = accessor.access_database(query);
+        while (rs_client.next()) {
+           clientID = rs_client.getInt("client_id");
+        }
+        ResultSet rs = accessor.access_database("SELECT * "
+                +" FROM customer_materials WHERE customer_id = '" +clientID+"'");
+        while (rs.next()) {
+            mat_name = rs.getString("material_name");
+
+        }
+        rs2 = accessor.access_database("SELECT * "
+                    +" FROM materials WHERE materialName = '" + mat_name +"'");
+        while (rs2.next()) {
+            String m_name = rs2.getString("materialName");
+            String unit = rs2.getString("unit");
+            double price = rs2.getDouble("price");
+            String description = rs2.getString("materialDesc");
+            current_material = new Material(m_name, unit, price, description);
+            material_array_list.add(current_material);
+        }
+        tblview_material_to_client.getItems().addAll(material_array_list);
+
+    }
+
+
     @FXML
     void add_material_database(MouseEvent event) {
         String name = txtfield_mat_name.getText();
@@ -205,7 +245,11 @@ public class Existing_client_table_controller {
     }
 
     @FXML
-    void add_material_to_client(MouseEvent event) {
+    void view_client_materials(MouseEvent event) throws SQLException {
+        for(int i = 0; i<tblview_material_to_client.getItems().size(); i++){
+            tblview_material_to_client.getItems().clear();
+        }
+        populate_customer_materials();
     }
 
     @FXML
@@ -222,4 +266,14 @@ public class Existing_client_table_controller {
     void go_to_labor(MouseEvent event) {
         Main.createNewScene(event, "Labor_screen.fxml");
     }
+
+    @FXML
+    void add_edit_client_materials(MouseEvent event) {
+        Main.createNewScene(event, "Labor_screen.fxml");
+    }
+    @FXML
+    void add_edit_client_labor(MouseEvent event) {
+        Main.createNewScene(event, "Labor_screen.fxml");
+    }
+
 }
