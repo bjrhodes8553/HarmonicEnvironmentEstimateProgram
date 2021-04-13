@@ -270,6 +270,7 @@ public class client_screen_controller implements Initializable {
             job_name = txtfield_job_name.getText();
             label_job_name.setTextFill(Color.GREEN);
             booleanArray[0] = false;
+            job_name_error_text.setText("");
         }
         if(txtfield_customer.getText().equals("")){
             customer_error_text.setText("Please fill in Customer");
@@ -279,6 +280,7 @@ public class client_screen_controller implements Initializable {
             customer = txtfield_customer.getText();
             label_customer.setTextFill(Color.GREEN);
             booleanArray[1] = false;
+            customer_error_text.setText("");
         }
         if(txtarea_rep.getText().equals("")){
             rep_error_text.setText("Please fill in Representative");
@@ -288,6 +290,7 @@ public class client_screen_controller implements Initializable {
             representative = txtarea_rep.getText();
             label_rep.setTextFill(Color.GREEN);
             booleanArray[2] = false;
+            rep_error_text.setText("");
         }
         if(txtarea_proj_mgr.getText().equals("")){
             proj_mgr_error_text.setText("Please fill in Project Manager");
@@ -297,6 +300,7 @@ public class client_screen_controller implements Initializable {
             project_manager = txtarea_proj_mgr.getText();
             label_proj_mgr.setTextFill(Color.GREEN);
             booleanArray[3] = false;
+            proj_mgr_error_text.setText("");
         }
         if(txtarea_estimator.getText().equals("")){
             estimator_error_text.setText("Please fill in Estimator");
@@ -306,6 +310,7 @@ public class client_screen_controller implements Initializable {
             estimator = txtarea_estimator.getText();
             label_estimator.setTextFill(Color.GREEN);
             booleanArray[4] = false;
+            estimator_error_text.setText("");
         }
         if(txtarea_job_notes.getText().equals("")){
             job_notes_error_text.setText("Please fill in Job Notes");
@@ -315,6 +320,7 @@ public class client_screen_controller implements Initializable {
             job_notes = txtarea_job_notes.getText();
             label_job_notes.setTextFill(Color.GREEN);
             booleanArray[5] = false;
+            job_notes_error_text.setText("");
         }
         if(txtarea_private_notes.getText().equals("")){
             pvt_notes_error_text.setText("Please fill in Private Notes");
@@ -324,6 +330,7 @@ public class client_screen_controller implements Initializable {
             private_notes = txtarea_private_notes.getText();
             label_private_notes.setTextFill(Color.GREEN);
             booleanArray[6] = false;
+            pvt_notes_error_text.setText("");
         }
         if(txtarea_conflicts.getText().equals("")){
             conflicts_error_text.setText("Please fill in Conflicts");
@@ -333,6 +340,7 @@ public class client_screen_controller implements Initializable {
             conflicts = txtarea_conflicts.getText();
             label_conflicts.setTextFill(Color.GREEN);
             booleanArray[7] = false;
+            conflicts_error_text.setText("");
         }
 
         // Check if any textfields are empty, if one is empty then boolean=true
@@ -440,7 +448,6 @@ public class client_screen_controller implements Initializable {
     @FXML
     void update_client(MouseEvent event) throws ClassNotFoundException,
         SQLException {
-        client_info_text.setText("Updated!");
         // Commented out because user already knows what client they're on
         // Also because they don't need to know the ID of their client since
         // that's exclusively used for database indexing reasons
@@ -455,124 +462,153 @@ public class client_screen_controller implements Initializable {
         String job_notes = "";
         String private_notes = "";
         String conflicts = "";
-
+        Boolean[] booleanArray = new Boolean[8];
+        Boolean isAFieldEmpty = true;
 
         // Get info from textfields
-        if(txtfield_job_name.getText().equals("")){
-            job_name_error_text.setText("Job Name was not updated");
-        }
-        else {
+        if (txtfield_job_name.getText().equals("")) {
+            job_name_error_text.setText("Please fill in Job Name");
+            booleanArray[0] = true;
+        } else {
             job_name = txtfield_job_name.getText();
             label_job_name.setTextFill(Color.GREEN);
+            booleanArray[0] = false;
+            job_name_error_text.setText("");
         }
-        if(txtfield_customer.getText().equals("")){
-            customer_error_text.setText("Customer was not updated");
-        }
-        else{
+        if (txtfield_customer.getText().equals("")) {
+            customer_error_text.setText("Please fill in Customer");
+            booleanArray[1] = true;
+        } else {
             customer = txtfield_customer.getText();
-            txtfield_customer.clear();
             label_customer.setTextFill(Color.GREEN);
+            booleanArray[1] = false;
+            customer_error_text.setText("");
         }
-        if(txtarea_rep.getText().equals("")){
-            rep_error_text.setText("Representative was not updated");
-        }
-        else{
+        if (txtarea_rep.getText().equals("")) {
+            rep_error_text.setText("Please fill in Representative");
+            booleanArray[2] = true;
+        } else {
             representative = txtarea_rep.getText();
-            txtarea_rep.clear();
             label_rep.setTextFill(Color.GREEN);
+            booleanArray[2] = false;
+            rep_error_text.setText("");
         }
-        if(txtarea_proj_mgr.getText().equals("")){
-            proj_mgr_error_text.setText("Project manager was not updated");
-        }
-        else{
+        if (txtarea_proj_mgr.getText().equals("")) {
+            proj_mgr_error_text.setText("Please fill in Project Manager");
+            booleanArray[3] = true;
+        } else {
             project_manager = txtarea_proj_mgr.getText();
-            txtarea_proj_mgr.clear();
             label_proj_mgr.setTextFill(Color.GREEN);
+            booleanArray[3] = false;
+            proj_mgr_error_text.setText("");
         }
-        if(txtarea_estimator.getText().equals("")){
-            estimator_error_text.setText("Estimator was not updated");
-        }
-        else{
+        if (txtarea_estimator.getText().equals("")) {
+            estimator_error_text.setText("Please fill in Estimator");
+            booleanArray[4] = true;
+        } else {
             estimator = txtarea_estimator.getText();
-            txtarea_estimator.clear();
             label_estimator.setTextFill(Color.GREEN);
+            booleanArray[4] = false;
+            estimator_error_text.setText("");
         }
-        if(txtarea_job_notes.getText().equals("")){
-            job_notes_error_text.setText("Job notes were not updated");
-        }
-        else{
+        if (txtarea_job_notes.getText().equals("")) {
+            job_notes_error_text.setText("Please fill in Job Notes");
+            booleanArray[5] = true;
+        } else {
             job_notes = txtarea_job_notes.getText();
-            txtarea_job_notes.clear();
             label_job_notes.setTextFill(Color.GREEN);
+            booleanArray[5] = false;
+            job_notes_error_text.setText("");
         }
-        if(txtarea_private_notes.getText().equals("")){
-            pvt_notes_error_text.setText("Private notes were not updated");
-        }
-        else{
+        if (txtarea_private_notes.getText().equals("")) {
+            pvt_notes_error_text.setText("Please fill in Private Notes");
+            booleanArray[6] = true;
+        } else {
             private_notes = txtarea_private_notes.getText();
-            txtarea_private_notes.clear();
             label_private_notes.setTextFill(Color.GREEN);
+            booleanArray[6] = false;
+            pvt_notes_error_text.setText("");
         }
-        if(txtarea_conflicts.getText().equals("")){
-            conflicts_error_text.setText("Conflicts were not updated");
-        }
-        else{
+        if (txtarea_conflicts.getText().equals("")) {
+            conflicts_error_text.setText("Please fill in Conflicts");
+            booleanArray[7] = true;
+        } else {
             conflicts = txtarea_conflicts.getText();
-            txtarea_conflicts.clear();
             label_conflicts.setTextFill(Color.GREEN);
+            booleanArray[7] = false;
+            conflicts_error_text.setText("");
         }
 
-        // Update
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
-            pst = con.prepareStatement("UPDATE harmonic_client set " +
-                "project_name = ?," +
-                "customer = ?," +
-                "representative = ?," +
-                "project_manager = ?," +
-                "estimator= ?," +
-                "job_notes = ?," +
-                "private_notes = ?," +
-                "conflicts = ? " +
-                "WHERE client_id = " + Main.current_client.getClient_id());
-
-            Statement s = con.createStatement();
-
-            pst.setString(1, job_name);
-            pst.setString(2, customer);
-            pst.setString(3, representative);
-            pst.setString(4, project_manager);
-            pst.setString(5, estimator);
-            pst.setString(6, job_notes);
-            pst.setString(7, private_notes);
-            pst.setString(8, conflicts);
-            pst.execute();
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+        // Check if any textfields are empty, if one is empty then boolean=true
+        for (int i = 0; i < booleanArray.length; i++) {
+            if (booleanArray[i]) {
+                isAFieldEmpty = true;
+                break;
+            } else {
+                isAFieldEmpty = false;
+            }
         }
-        //Clear text fields and text areas after update button pressed
 
+        if (!isAFieldEmpty) {
+            // Update
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager
+                    .getConnection(
+                        "jdbc:mysql://localhost/harmonic_environment",
+                        "root", "");
+                pst = con.prepareStatement("UPDATE harmonic_client set " +
+                    "project_name = ?," +
+                    "customer = ?," +
+                    "representative = ?," +
+                    "project_manager = ?," +
+                    "estimator= ?," +
+                    "job_notes = ?," +
+                    "private_notes = ?," +
+                    "conflicts = ? " +
+                    "WHERE client_id = " + Main.current_client.getClient_id());
 
+                Statement s = con.createStatement();
 
+                pst.setString(1, job_name);
+                pst.setString(2, customer);
+                pst.setString(3, representative);
+                pst.setString(4, project_manager);
+                pst.setString(5, estimator);
+                pst.setString(6, job_notes);
+                pst.setString(7, private_notes);
+                pst.setString(8, conflicts);
+                pst.execute();
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
+            //Clear text fields and text areas after update button pressed
 
+            con.close();
 
+            //Repopulate text areas with information and an updated message
+/*            txtfield_job_name.setPromptText(job_name);
+            txtfield_customer.appendText(customer);
+            txtarea_rep.appendText(representative);
+            txtarea_proj_mgr.appendText(project_manager);
+            txtarea_estimator.appendText(estimator);
+            txtarea_job_notes.appendText(job_notes);
+            txtarea_private_notes.appendText(private_notes);
+            txtarea_conflicts.appendText(conflicts);*/
 
-
-
-
-        con.close();
-
-
-        //Repopulate text areas with information and an updated message
-        txtfield_job_name.setPromptText(job_name);
-        txtfield_customer.appendText(customer);
-        txtarea_rep.appendText(representative);
-        txtarea_proj_mgr.appendText(project_manager);
-        txtarea_estimator.appendText(estimator);
-        txtarea_job_notes.appendText(job_notes);
-        txtarea_private_notes.appendText(private_notes);
-        txtarea_conflicts.appendText(conflicts);
+            job_name_error_text.setText("");
+            customer_error_text.setText("");
+            rep_error_text.setText("");
+            proj_mgr_error_text.setText("");
+            estimator_error_text.setText("");
+            job_notes_error_text.setText("");
+            pvt_notes_error_text.setText("");
+            conflicts_error_text.setText("");
+            client_info_text.setText("Updated!");
+        }
+        else {
+            System.out.println("A textfield is empty, new client not added");
+        }
 
 
     }
