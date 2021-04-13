@@ -132,8 +132,18 @@ public class Labor_screen_controller {
     }
 
     @FXML
-    void update_labor(MouseEvent event) {
-
+    void update_labor(MouseEvent event) throws SQLException {
+        Database_Accessor accessor = new Database_Accessor();
+        double edit_price = Double.parseDouble(txtfield_edit_price.getText());
+        String edit_name = tblview_labor.getSelectionModel().getSelectedItem().getName();
+        accessor.update_database(
+            "UPDATE labor SET price_per_hour = '" + edit_price + "' WHERE "
+                + "laborName = '" + edit_name + "'");
+        txtfield_edit_price.clear();
+        for(int i = 0; i<tblview_labor.getItems().size(); i++){
+            tblview_labor.getItems().clear();
+        }
+        fill_in_table();
     }
 
     @FXML
