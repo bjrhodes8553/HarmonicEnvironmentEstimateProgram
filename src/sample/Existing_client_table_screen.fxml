@@ -71,7 +71,7 @@
                       <TableColumn fx:id="col_client_labor_price" prefWidth="86.0" text="Price/Hour" />
                     </columns>
                   </TableView>
-                  <Button fx:id="btn_view_client_labor" layoutX="34.0" layoutY="154.0" mnemonicParsing="false" text="View" />
+                  <Button fx:id="btn_view_client_labor" layoutX="34.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#view_client_labor" text="View" />
                   <Button fx:id="btn_add_edit_labor" layoutX="133.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#add_edit_client_labor" text="Add/Edit" />
                </children></AnchorPane>
         </content>
