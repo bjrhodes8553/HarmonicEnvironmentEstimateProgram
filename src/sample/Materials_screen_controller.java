@@ -80,6 +80,7 @@ public class Materials_screen_controller {
             double price = rs.getDouble("price");
             String description = rs.getString("materialDesc");
             current_material = new Material(name, unit, price, description);
+
             Main.current_material = current_material;
             material_array_list.add(current_material);
         }
@@ -98,26 +99,43 @@ public class Materials_screen_controller {
             double price = rs.getDouble("price");
             description = rs.getString("materialDesc");
             current_material = new Material(m_name, unit, price, description);
+            Main.current_material = current_material;
         }
-        Main.current_material = current_material;
-        txtarea_description.appendText(description);
+
+        txtarea_description.appendText(Main.current_material.getDescription());
     }
 
 
     @FXML
-    void edit_material(MouseEvent event) {
-
+    void edit_material(MouseEvent event) throws SQLException {
+        Database_Accessor accessor = new Database_Accessor();
+        String edit_unit = txtfield_edit_unit.getText();
+        double edit_price = Double.parseDouble(txtfield_edit_price.getText());
+        String edit_name = tblview_materials.getSelectionModel().getSelectedItem().getName();
+        accessor.update_database(
+                "UPDATE materials "
+                +"SET unit = '" + edit_unit + "', "
+                +"price = '" + edit_price + "'"
+               + " WHERE materialName = '" + edit_name+ "'");
+        txtfield_edit_unit.clear();
+        txtfield_edit_price.clear();
+        for(int i = 0; i<tblview_materials.getItems().size(); i++){
+            tblview_materials.getItems().clear();
+        }
+        fill_in_table();
 
     }
 
     @FXML
-    void edit_material_description(MouseEvent event) {
+    void edit_material_description(MouseEvent event) throws SQLException {
         Database_Accessor accessor = new Database_Accessor();
         String description = txtarea_description.getText();
-        String name = tblview_materials.getSelectionModel().getSelectedItem().getName();
+        String edit_name = tblview_materials.getSelectionModel().getSelectedItem().getName();
         accessor.update_database("UPDATE materials SET materialDesc = '" +
-            description + "' WHERE materialName = '" + name +"'");
+                description + "' WHERE materialName = '" + edit_name +"'");
         txtarea_description.clear();
+
+
     }
 
     @FXML
