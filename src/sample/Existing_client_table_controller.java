@@ -99,10 +99,18 @@ public class Existing_client_table_controller {
     @FXML
     private Button btn_add_edit_lab;
 
+    public String username;
+    public String password;
 
 
 
+    @FXML
     public void initialize() {
+        //String username = "";
+        //String password = "";
+        Main.current_user = new User(username, password);
+        label_users_name.setText(Main.current_user.getUsername());
+
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
             String>("client"));
         col_project.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,

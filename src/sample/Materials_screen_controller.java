@@ -132,7 +132,7 @@ public class Materials_screen_controller {
         String description = txtarea_description.getText();
         String edit_name = tblview_materials.getSelectionModel().getSelectedItem().getName();
         accessor.update_database("UPDATE materials SET materialDesc = '" +
-                description + "' WHERE materialName = '" + edit_name +"'");
+            description + "' WHERE materialName = '" + edit_name +"'");
         txtarea_description.clear();
 
 
