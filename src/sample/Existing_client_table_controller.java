@@ -314,7 +314,7 @@ public class Existing_client_table_controller {
         clientID = this_client.getClient_id();
 
         // This query will retrieve the material names associated with the client.
-        ResultSet rs = accessor.access_database("SELECT DISTINCT *"
+        ResultSet rs = accessor.access_database("SELECT *"
                 +" FROM customer_materials cm " +
                 "INNER JOIN materials m ON cm.material_name= m.materialName " +
                 "WHERE customer_id = '" +clientID+"'");
