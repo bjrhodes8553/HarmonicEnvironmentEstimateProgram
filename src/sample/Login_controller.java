@@ -35,7 +35,7 @@ public class Login_controller {
         ResultSet rs;
 
         if(txtfield_username.getText().equals("") || txtfield_password.getText().equals("")){
-            login_error_text.setText("Please enter a correct username and password");
+            login_error_text.setText("Incorrect Username or Password");
         }else{
             username = txtfield_username.getText();
             password = txtfield_password.getText();
@@ -48,7 +48,10 @@ public class Login_controller {
                 String pass = rs.getString("password");
 
                 if (username.equalsIgnoreCase(user) && password.equals(pass)){
-                    login_error_text.setText("Logging In...");
+                    // Set current user in main using the username and password
+                    User myUser = new User(username, password);
+                    Main.current_user = myUser;
+                    login_error_text.setText("Incorrect Username or Password");
                     Main.createNewScene(event, "Existing_client_table_screen.fxml");
                 }
                 else {
