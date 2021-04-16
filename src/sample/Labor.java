@@ -4,6 +4,7 @@ public class Labor {
     String name;
     double price;
     String description;
+    double quantity;
 
     public Labor(String name, double price, String description) {
         this.name = name;
@@ -13,6 +14,12 @@ public class Labor {
     public Labor(String name, double price) {
         this.name = name;
         this.price = price;
+    }
+
+    public Labor(String name, double price, double quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
 
     }
 
@@ -40,6 +47,13 @@ public class Labor {
         this.description = description;
     }
 
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
+    }
 
     @Override
     public String toString() {

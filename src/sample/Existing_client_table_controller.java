@@ -45,6 +45,9 @@ public class Existing_client_table_controller {
     private TableColumn<?, ?> col_client_material_price;
 
     @FXML
+    private TableColumn<?,?> col_client_material_quant;
+
+    @FXML
     private Button btn_view_client_materials;
     @FXML
     private TableView<Labor> tblview_labor_to_client;
@@ -54,6 +57,10 @@ public class Existing_client_table_controller {
 
     @FXML
     private TableColumn<?, ?> col_client_labor_price;
+
+    @FXML
+    private TableColumn<?,?> col_client_labor_quant;
+
 
     @FXML
     private Button btn_view_client_labor;
@@ -249,7 +256,6 @@ public class Existing_client_table_controller {
     }
 
 
-
     /*
     This method populates the tableview for the materials in the customer's
     profile. The materials can then be edited by pressing the Add/Edit button,
@@ -262,6 +268,9 @@ public class Existing_client_table_controller {
                 privateNotes = "", conflicts = "";
         Material current_material = null;
         String mat_name = "";
+        double mat_quantity = 0.0;
+        double mat_price = 0.0;
+        String mat_unit = "";
         ResultSet rs2 = null;
         int clientID = 1;
 
@@ -269,6 +278,7 @@ public class Existing_client_table_controller {
         col_client_material_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_client_material_unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         col_client_material_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        col_client_material_quant.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         ArrayList <Material> material_array_list = new ArrayList<>();
         Database_Accessor accessor = new Database_Accessor();
         ClientProjectThing current_client= tblview_client.getSelectionModel().getSelectedItem();
@@ -296,27 +306,24 @@ public class Existing_client_table_controller {
 
         //Set Main.current_client to the selected client so it can be used in other classes.
         Main.current_client = this_client;
+        clientID = this_client.getClient_id();
 
         // This query will retrieve the material names associated with the client.
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM customer_materials WHERE customer_id = '" +clientID+"'");
+                +" FROM customer_materials cm " +
+                "INNER JOIN materials m ON cm.material_name= m.materialName " +
+                "WHERE customer_id = '" +clientID+"'");
         while (rs.next()) {
             mat_name = rs.getString("material_name");
-        }
+            mat_quantity = rs.getDouble("quantity");
+            mat_price = rs.getDouble("price");
+            mat_unit = rs.getString("unit");
 
-        // This query will retrieve the material's information that are associated with client.
-        rs2 = accessor.access_database("SELECT * "
-                    +" FROM materials WHERE materialName = '" + mat_name +"'");
-        while (rs2.next()) {
-            String m_name = rs2.getString("materialName");
-            String unit = rs2.getString("unit");
-            double price = rs2.getDouble("price");
-            String description = rs2.getString("materialDesc");
-            current_material = new Material(m_name, unit, price, description);
+            current_material = new Material(mat_name, mat_unit, mat_price, mat_quantity);
             material_array_list.add(current_material);
         }
-        //Populates the tableview.
         tblview_material_to_client.getItems().addAll(material_array_list);
+
 
     }
 
@@ -330,15 +337,16 @@ public class Existing_client_table_controller {
     void populate_customer_labor() throws SQLException {
         Labor current_labor = null;
         String lab_name = "";
-        ResultSet rs2 = null;
         int clientID = 1;
         String projectName = "", customer = "", representative = "",
                 projectManager = "", estimator = "", jobNotes = "",
                 privateNotes = "", conflicts = "";
+        Harmonic_Client this_client = null;
 
         //Set up the columns for the tableview with correct variables.
         col_client_labor_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_client_labor_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        col_client_labor_quant.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         ArrayList <Labor> labor_array_list = new ArrayList<>();
         Database_Accessor accessor = new Database_Accessor();
 
@@ -358,30 +366,27 @@ public class Existing_client_table_controller {
             jobNotes = rs_client.getString("job_notes");
             privateNotes = rs_client.getString("private_notes");
             conflicts = rs_client.getString("conflicts");
+            //This Harmonic_Client object will be used in other classes.
+            this_client = new Harmonic_Client(clientID,
+                    projectName, customer,
+                    representative, projectManager, estimator, jobNotes,
+                    privateNotes, conflicts);
 
         }
-        //This Harmonic_Client object will be used in other classes.
-        Harmonic_Client this_client = new Harmonic_Client(clientID,
-                projectName, customer,
-                representative, projectManager, estimator, jobNotes,
-                privateNotes, conflicts);
+
         //Set Main.current_client to the selected client so it can be used in other classes.
         Main.current_client = this_client;
 
+        clientID = this_client.getClient_id();
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM customer_labor WHERE customer_id = '" +clientID+"'");
+                +" FROM customer_labor cl INNER JOIN labor l ON cl.labor_name = l.laborName WHERE customer_id = '" +clientID+"'");
         while (rs.next()) {
             lab_name = rs.getString("labor_name");
-
-        }
-        rs2 = accessor.access_database("SELECT * "
-                +" FROM labor WHERE laborName = '" + lab_name +"'");
-        while (rs2.next()) {
-            String l_name = rs2.getString("laborName");
-            double price = rs2.getDouble("price_per_hour");
-            String description = rs2.getString("laborDesc");
-            current_labor = new Labor(l_name, price, description);
+            double lab_quantity = rs.getDouble("quantity");
+            double lab_price = rs.getDouble("price_per_hour");
+            current_labor = new Labor(lab_name, lab_price, lab_quantity);
             labor_array_list.add(current_labor);
+
         }
         tblview_labor_to_client.getItems().addAll(labor_array_list);
 

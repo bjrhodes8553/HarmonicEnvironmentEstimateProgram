@@ -4,23 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client_Materials_Controller">
    <children>
-      <TableView fx:id="tblview_db_mat" layoutX="36.0" layoutY="39.0" prefHeight="282.0" prefWidth="244.0">
+      <TableView fx:id="tblview_db_mat" layoutX="36.0" layoutY="39.0" prefHeight="282.0" prefWidth="209.0">
         <columns>
           <TableColumn fx:id="col_db_name" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="col_db_unit" prefWidth="75.0" text="Unit" />
-            <TableColumn fx:id="col_db_price" prefWidth="93.0" text="Price" />
+          <TableColumn fx:id="col_db_unit" prefWidth="59.0" text="Unit" />
+            <TableColumn fx:id="col_db_price" prefWidth="74.0" text="Price" />
         </columns>
       </TableView>
-      <TableView fx:id="tblview_client_mat" layoutX="336.0" layoutY="39.0" prefHeight="282.0" prefWidth="234.0">
+      <TableView fx:id="tblview_client_mat" layoutX="355.0" layoutY="39.0" prefHeight="282.0" prefWidth="215.0">
         <columns>
           <TableColumn fx:id="col_client_name" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="col_client_unit" prefWidth="75.0" text="Unit" />
-            <TableColumn fx:id="col_client_price" prefWidth="83.0" text="Price" />
+            <TableColumn fx:id="col_client_price" prefWidth="64.0" text="Price" />
         </columns>
       </TableView>
       <Button fx:id="btn_add_client_mat" layoutX="78.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#add_material_to_client" text="Add to Client Materials" />
@@ -36,5 +37,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="txtfield_quantity" alignment="CENTER" layoutX="280.0" layoutY="200.0" prefHeight="25.0" prefWidth="41.0" text="1" />
+      <Label layoutX="278.0" layoutY="180.0" text="Quantity" />
    </children>
 </AnchorPane>

@@ -41,23 +41,21 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                  <Button fx:id="button_add_new_client" layoutX="57.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#go_to_new_client" text="New Client" />
-                 <Button fx:id="button_get_quote" layoutX="57.0"
-                   layoutY="40.0"
-                   mnemonicParsing="false" onMouseClicked="#go_to_quote"
-                   text="View Quote" />
+                 <Button fx:id="button_get_quote" layoutX="57.0" layoutY="40.0" mnemonicParsing="false" onMouseClicked="#go_to_quote" text="View Quote" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="277.0" layoutY="54.0" prefHeight="236.0" prefWidth="241.0" text="Materials in Clients Account">
+      <TitledPane animated="false" layoutX="277.0" layoutY="54.0" prefHeight="236.0" prefWidth="270.0" text="Materials in Clients Account">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="213.0" prefWidth="195.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="237.0">
                <children>
-                  <TableView fx:id="tblview_material_to_client" layoutX="3.0" layoutY="7.0" prefHeight="154.0" prefWidth="230.0">
+                  <TableView fx:id="tblview_material_to_client" layoutX="3.0" layoutY="7.0" prefHeight="154.0" prefWidth="257.0">
                     <columns>
-                      <TableColumn fx:id="col_client_material_name" prefWidth="120.0" text="Name" />
-                      <TableColumn fx:id="col_client_material_unit" prefWidth="51.0" text="Unit" />
-                        <TableColumn fx:id="col_client_material_price" prefWidth="58.0" text="Price" />
+                      <TableColumn fx:id="col_client_material_name" prefWidth="88.0" text="Name" />
+                      <TableColumn fx:id="col_client_material_unit" prefWidth="45.0" text="Unit" />
+                        <TableColumn fx:id="col_client_material_price" prefWidth="56.0" text="Price" />
+                        <TableColumn fx:id="col_client_material_quant" prefWidth="75.0" text="Quantity" />
                     </columns>
                   </TableView>
                   <Button fx:id="btn_view_client_materials" layoutX="33.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#view_client_materials" text="View" />
@@ -65,14 +63,15 @@
                </children></AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="277.0" layoutY="309.0" prefHeight="219.0" prefWidth="241.0" text="Labor in Client's Account">
+      <TitledPane animated="false" layoutX="277.0" layoutY="309.0" prefHeight="219.0" prefWidth="257.0" text="Labor in Client's Account">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="204.0" prefWidth="219.0">
                <children>
-                  <TableView fx:id="tblview_labor_to_client" layoutX="14.0" layoutY="7.0" prefHeight="142.0" prefWidth="212.0">
+                  <TableView fx:id="tblview_labor_to_client" layoutX="14.0" layoutY="7.0" prefHeight="142.0" prefWidth="233.0">
                     <columns>
-                      <TableColumn fx:id="col_client_labor_name" prefWidth="125.0" text="Name" />
-                      <TableColumn fx:id="col_client_labor_price" prefWidth="86.0" text="Price/Hour" />
+                      <TableColumn fx:id="col_client_labor_name" prefWidth="78.0" text="Name" />
+                      <TableColumn fx:id="col_client_labor_price" prefWidth="77.0" text="Price/Hour" />
+                        <TableColumn fx:id="col_client_labor_quant" prefWidth="82.0" text="Quantity" />
                     </columns>
                   </TableView>
                   <Button fx:id="btn_view_client_labor" layoutX="34.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#view_client_labor" text="View" />
@@ -80,9 +79,9 @@
                </children></AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="528.0" layoutY="54.0" prefHeight="208.0" prefWidth="241.0" text="Add Material to Database">
+      <TitledPane animated="false" layoutX="557.0" layoutY="54.0" prefHeight="208.0" prefWidth="225.0" text="Add Material to Database">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="173.0" prefWidth="239.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="182.0" prefWidth="222.0">
                <children>
                   <Label layoutX="15.0" layoutY="35.0" text="Name:" />
                   <Label layoutX="20.0" layoutY="76.0" text="Unit:" />
@@ -95,15 +94,15 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <TitledPane animated="false" layoutX="528.0" layoutY="309.0" prefHeight="191.0" prefWidth="241.0" text="Add Labor to Database">
+      <TitledPane animated="false" layoutX="557.0" layoutY="323.0" prefHeight="185.0" prefWidth="225.0" text="Add Labor to Database">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="223.0">
                <children>
-                  <Label layoutX="38.0" layoutY="38.0" text="Name:" />
-                  <Label layoutX="14.0" layoutY="80.0" text="Price/Hour:" />
-                  <TextField fx:id="txtfield_lab_name_db" layoutX="86.0" layoutY="34.0" />
-                  <TextField fx:id="txtfield_lab_price_db" layoutX="86.0" layoutY="76.0" />
-                  <Button fx:id="btn_add_lab_database" layoutX="74.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#add_labor_database" text="Add to Database" />
+                  <Label layoutX="14.0" layoutY="38.0" text="Name:" />
+                  <Label layoutY="80.0" text="Price/Hour:" />
+                  <TextField fx:id="txtfield_lab_name_db" layoutX="68.0" layoutY="34.0" />
+                  <TextField fx:id="txtfield_lab_price_db" layoutX="68.0" layoutY="76.0" />
+                  <Button fx:id="btn_add_lab_database" layoutX="59.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#add_labor_database" text="Add to Database" />
                </children>
             </AnchorPane>
         </content>

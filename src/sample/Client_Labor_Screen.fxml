@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client_Labor_Controller">
    <children>
@@ -35,5 +35,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Label layoutX="277.0" layoutY="183.0" text="Quantity" />
+      <TextField fx:id="txtfield_quantity" alignment="CENTER" layoutX="277.0" layoutY="204.0" prefHeight="25.0" prefWidth="46.0" text="1.0" />
    </children>
 </AnchorPane>

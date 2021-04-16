@@ -5,6 +5,7 @@ public class Material {
     String unit;
     double price;
     String description;
+    double quantity;
 
     public Material(String name, String unit, double price, String description) {
         this.name = name;
@@ -17,6 +18,14 @@ public class Material {
         this.name = name;
         this.unit = unit;
         this.price = price;
+
+    }
+
+    public Material(String name, String unit, double price, double quantity) {
+        this.name = name;
+        this.unit = unit;
+        this.price = price;
+        this.quantity = quantity;
 
     }
 
@@ -50,6 +59,14 @@ public class Material {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(double quantity) {
+        this.quantity = quantity;
     }
 
 
