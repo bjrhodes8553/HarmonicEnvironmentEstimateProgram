@@ -19,6 +19,7 @@ public class Main extends Application {
     public static Material current_material;
     public static User current_user;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("Login_screen.fxml"));

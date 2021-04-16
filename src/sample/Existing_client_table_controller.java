@@ -108,8 +108,9 @@ public class Existing_client_table_controller {
     public void initialize() {
         //String username = "";
         //String password = "";
-        Main.current_user = new User(username, password);
-        label_users_name.setText(Main.current_user.getUsername());
+        String current_username = Main.current_user.getUsername();
+
+        label_users_name.setText(current_username);
 
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
             String>("client"));
@@ -313,7 +314,7 @@ public class Existing_client_table_controller {
         clientID = this_client.getClient_id();
 
         // This query will retrieve the material names associated with the client.
-        ResultSet rs = accessor.access_database("SELECT * "
+        ResultSet rs = accessor.access_database("SELECT DISTINCT *"
                 +" FROM customer_materials cm " +
                 "INNER JOIN materials m ON cm.material_name= m.materialName " +
                 "WHERE customer_id = '" +clientID+"'");
