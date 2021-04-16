@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -39,6 +40,9 @@ public class Client_Materials_Controller {
     private TableColumn<?, ?> col_client_price;
 
     @FXML
+    private TableColumn<?, ?> col_material_quantity;
+
+    @FXML
     private Button btn_add_client_mat;
 
     @FXML
@@ -46,6 +50,9 @@ public class Client_Materials_Controller {
 
     @FXML
     private Button btn_back;
+
+    @FXML
+    private TextField txtfield_quantity;
 
 
     @FXML
@@ -58,10 +65,11 @@ public class Client_Materials_Controller {
     void add_material_to_client(MouseEvent event) throws SQLException {
         int cust_id = Main.current_client.getClient_id();
         String mat_name = tblview_db_mat.getSelectionModel().getSelectedItem().getName();
+        double mat_quantity = Double.parseDouble(txtfield_quantity.getText());
         Database_Accessor accessor = new Database_Accessor();
         accessor.update_database("INSERT INTO customer_materials(customer_id, "
-                + "material_name) VALUES ('"
-                +cust_id+"', '"+mat_name+"')");
+                + "material_name, quantity) VALUES ('"
+                +cust_id+"', '"+mat_name+"', '"+mat_quantity+"')");
         for(int i = 0; i<tblview_client_mat.getItems().size(); i++){
             tblview_client_mat.getItems().clear();
         }
@@ -121,28 +129,32 @@ public class Client_Materials_Controller {
          */
         Material current_material = null;
         String mat_name = "";
-        ResultSet rs2 = null;
+        double mat_quantity = 0;
+        double mat_price = 0;
+        String mat_unit = "";
+
 
         int clientID = Main.current_client.getClient_id();
         col_client_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_client_unit.setCellValueFactory(new PropertyValueFactory<>("unit"));
         col_client_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        col_material_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         ArrayList <Material> material_array_list = new ArrayList<>();
-        Database_Accessor accessor = new Database_Accessor();
+        Database_Accessor accessor = new Database_Accessor();;
+        clientID = Main.current_client.getClient_id();
+
+        // This query will retrieve the material names associated with the client.
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM customer_materials WHERE customer_id = '" +clientID+"'");
+                +" FROM customer_materials cm " +
+                "INNER JOIN materials m ON cm.material_name= m.materialName " +
+                "WHERE customer_id = '" +clientID+"'");
         while (rs.next()) {
             mat_name = rs.getString("material_name");
+            mat_quantity = rs.getDouble("quantity");
+            mat_price = rs.getDouble("price");
+            mat_unit = rs.getString("unit");
 
-        }
-        rs2 = accessor.access_database("SELECT * "
-                +" FROM materials WHERE materialName = '" + mat_name +"'");
-        while (rs2.next()) {
-            String m_name = rs2.getString("materialName");
-            String unit = rs2.getString("unit");
-            double price = rs2.getDouble("price");
-            String description = rs2.getString("materialDesc");
-            current_material = new Material(m_name, unit, price, description);
+            current_material = new Material(mat_name, mat_unit, mat_price, mat_quantity);
             material_array_list.add(current_material);
         }
         tblview_client_mat.getItems().addAll(material_array_list);

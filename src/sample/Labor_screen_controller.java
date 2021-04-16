@@ -121,7 +121,7 @@ public class Labor_screen_controller {
     }
 
     @FXML
-    void remove_labor(MouseEvent event) {
+    void remove_labor(MouseEvent event) throws SQLException {
         Database_Accessor accessor = new Database_Accessor();
         Labor current_labor = tblview_labor.getSelectionModel().getSelectedItem();
         String name = current_labor.getName();

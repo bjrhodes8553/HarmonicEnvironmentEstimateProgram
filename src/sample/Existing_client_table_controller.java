@@ -102,10 +102,6 @@ public class Existing_client_table_controller {
 
 
 
-
-
-
-
     public void initialize() {
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,
             String>("client"));
@@ -386,7 +382,6 @@ public class Existing_client_table_controller {
             double lab_price = rs.getDouble("price_per_hour");
             current_labor = new Labor(lab_name, lab_price, lab_quantity);
             labor_array_list.add(current_labor);
-
         }
         tblview_labor_to_client.getItems().addAll(labor_array_list);
 
@@ -442,11 +437,72 @@ public class Existing_client_table_controller {
     }
 
     @FXML
-    void add_edit_client_materials(MouseEvent event) {
+    void add_edit_client_materials(MouseEvent event) throws SQLException {
+        String projectName = "", customer = "", representative = "",
+                projectManager = "", estimator = "", jobNotes = "",
+                privateNotes = "", conflicts = "";
+        int clientID = 1;
+
+        Database_Accessor accessor = new Database_Accessor();
+        ClientProjectThing current_client= tblview_client.getSelectionModel().getSelectedItem();
+        String query = "SELECT * FROM "
+                + "harmonic_client WHERE customer = '" + current_client.getClient() + "' AND "
+                + "project_name = '" + current_client.getProject() + "'";
+        ResultSet rs_client = accessor.access_database(query);
+        while (rs_client.next()) {
+            clientID = rs_client.getInt("client_id");
+            projectName = rs_client.getString("project_name");
+            customer = rs_client.getString("customer");
+            representative = rs_client.getString("representative");
+            projectManager = rs_client.getString("project_manager");
+            estimator = rs_client.getString("estimator");
+            jobNotes = rs_client.getString("job_notes");
+            privateNotes = rs_client.getString("private_notes");
+            conflicts = rs_client.getString("conflicts");
+        }
+
+        //This Harmonic_Client object will be used in other classes.
+        Harmonic_Client this_client = new Harmonic_Client(clientID,
+                projectName, customer,
+                representative, projectManager, estimator, jobNotes,
+                privateNotes, conflicts);
+
+        //Set Main.current_client to the selected client so it can be used in other classes.
+        Main.current_client = this_client;
         Main.createNewScene(event, "Client_Materials_Screen.fxml");
     }
     @FXML
-    void add_edit_client_labor(MouseEvent event) {
+    void add_edit_client_labor(MouseEvent event) throws SQLException {
+        String projectName = "", customer = "", representative = "",
+                projectManager = "", estimator = "", jobNotes = "",
+                privateNotes = "", conflicts = "";
+        int clientID = 1;
+        Database_Accessor accessor = new Database_Accessor();
+        ClientProjectThing current_client= tblview_client.getSelectionModel().getSelectedItem();
+        String query = "SELECT * FROM "
+                + "harmonic_client WHERE customer = '" + current_client.getClient() + "' AND "
+                + "project_name = '" + current_client.getProject() + "'";
+        ResultSet rs_client = accessor.access_database(query);
+        while (rs_client.next()) {
+            clientID = rs_client.getInt("client_id");
+            projectName = rs_client.getString("project_name");
+            customer = rs_client.getString("customer");
+            representative = rs_client.getString("representative");
+            projectManager = rs_client.getString("project_manager");
+            estimator = rs_client.getString("estimator");
+            jobNotes = rs_client.getString("job_notes");
+            privateNotes = rs_client.getString("private_notes");
+            conflicts = rs_client.getString("conflicts");
+        }
+
+        //This Harmonic_Client object will be used in other classes.
+        Harmonic_Client this_client = new Harmonic_Client(clientID,
+                projectName, customer,
+                representative, projectManager, estimator, jobNotes,
+                privateNotes, conflicts);
+
+        //Set Main.current_client to the selected client so it can be used in other classes.
+        Main.current_client = this_client;
         Main.createNewScene(event, "Client_Labor_Screen.fxml");
     }
 

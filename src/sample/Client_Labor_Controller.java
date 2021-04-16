@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
@@ -32,6 +33,9 @@ public class Client_Labor_Controller {
     private TableColumn<?, ?> col_client_price;
 
     @FXML
+    private TableColumn<?, ?> col_labor_quantity;
+
+    @FXML
     private Button btn_back;
 
     @FXML
@@ -39,6 +43,9 @@ public class Client_Labor_Controller {
 
     @FXML
     private Button btn_remove_client_labor;
+
+    @FXML
+    private TextField txtfield_quantity;
 
     @FXML
     void initialize() throws SQLException {
@@ -51,10 +58,11 @@ public class Client_Labor_Controller {
     void add_client_labor(MouseEvent event) throws SQLException {
         int cust_id = Main.current_client.getClient_id();
         String lab_name = tbllview_db_labor.getSelectionModel().getSelectedItem().getName();
+        double lab_quantity = Double.parseDouble(txtfield_quantity.getText());
         Database_Accessor accessor = new Database_Accessor();
         accessor.update_database("INSERT INTO customer_labor(customer_id, "
-                + "labor_name) VALUES ('"
-                +cust_id+"', '"+lab_name+"')");
+                + "labor_name, quantity) VALUES ('"
+                +cust_id+"', '"+lab_name+"', '"+lab_quantity+"')");
         for(int i = 0; i<tblview_client_labor.getItems().size(); i++){
             tblview_client_labor.getItems().clear();
         }
@@ -91,22 +99,18 @@ public class Client_Labor_Controller {
         //Set up the columns for the tableview with correct variables.
         col_client_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         col_client_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        col_labor_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         ArrayList<Labor> labor_array_list = new ArrayList<>();
         Database_Accessor accessor = new Database_Accessor();
 
+        clientID = Main.current_client.getClient_id();
         ResultSet rs = accessor.access_database("SELECT * "
-                +" FROM customer_labor WHERE customer_id = '" +clientID+"'");
+                +" FROM customer_labor cl INNER JOIN labor l ON cl.labor_name = l.laborName WHERE customer_id = '" +clientID+"'");
         while (rs.next()) {
             lab_name = rs.getString("labor_name");
-
-        }
-        rs2 = accessor.access_database("SELECT * "
-                +" FROM labor WHERE laborName = '" + lab_name +"'");
-        while (rs2.next()) {
-            String l_name = rs2.getString("laborName");
-            double price = rs2.getDouble("price_per_hour");
-            String description = rs2.getString("laborDesc");
-            current_labor = new Labor(l_name, price, description);
+            double lab_quantity = rs.getDouble("quantity");
+            double lab_price = rs.getDouble("price_per_hour");
+            current_labor = new Labor(lab_name, lab_price, lab_quantity);
             labor_array_list.add(current_labor);
         }
         tblview_client_labor.getItems().addAll(labor_array_list);
