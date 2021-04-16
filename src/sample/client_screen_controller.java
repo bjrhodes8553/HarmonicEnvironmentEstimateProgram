@@ -32,14 +32,8 @@ public class client_screen_controller implements Initializable {
         choicebox_quote_type.setItems(FXCollections.observableArrayList(
             "Type A", "Type B", "Type C"
         ));
-        choicebox_freight_company.setItems(FXCollections.observableArrayList(
-            "Taylor", "Swift", "Warner"
-        ));
         choicebox_quote_status.setItems(FXCollections.observableArrayList(
             "On Time", "Delayed", "Ahead of Time", "Pending"
-        ));
-        choicebox_room_size.setItems(FXCollections.observableArrayList(
-            "Small", "Medium", "Large"
         ));
 
         // If current_client's name is of length 0 that means they chose "New
@@ -147,54 +141,6 @@ public class client_screen_controller implements Initializable {
     private Button button_update_due_date;
 
     @FXML
-    private Label label_estimated_weight;
-
-    @FXML
-    private TextField txtfield_additional_weight;
-
-    @FXML
-    private TextField txtfield_shipping_zip;
-
-    @FXML
-    private ChoiceBox choicebox_freight_company;
-
-    @FXML
-    private TextArea txtarea_freight_cost;
-
-    @FXML
-    private TextArea txtarea_freight_sell;
-
-    @FXML
-    private TextField txtfield_num_of_shipments;
-
-    @FXML
-    private CheckBox checkbox_full_truck;
-
-    @FXML
-    private CheckBox checkbox_dedicated;
-
-    @FXML
-    private Button button_add_weight;
-
-    @FXML
-    private Button button_update_shipment;
-
-    @FXML
-    private TextField txtfield_sqft;
-
-    @FXML
-    private TextField txtfield_height;
-
-    @FXML
-    private Button button_gen_volume;
-
-    @FXML
-    private Label label_cubic_feet;
-
-    @FXML
-    private ChoiceBox choicebox_room_size;
-
-    @FXML
     public Text client_info_text;
 
     @FXML
@@ -222,31 +168,16 @@ public class client_screen_controller implements Initializable {
     public Text conflicts_error_text;
 
     @FXML
-    public Text curr_client_text;
-
-    @FXML
-    public Text client_id_text;
-
-    @FXML
     public Text dueDate_update_text;
 
     @FXML
     public Text quote_text;
-
-
-    @FXML
-    void add_additional_weight(MouseEvent event) {
-    }
 
     @FXML
     void add_revision(MouseEvent event) {
         label_original_quote_date.setText("03/15/2019");
     }
 
-    @FXML
-    void generate_volume(MouseEvent event) {
-        label_cubic_feet.setText("1000");
-    }
 
     @FXML
     void add_client(MouseEvent event) throws ClassNotFoundException, SQLException {
@@ -413,14 +344,6 @@ public class client_screen_controller implements Initializable {
             con.close();
 
             //Repopulate text areas with information and an updated message
-/*            txtfield_job_name.setPromptText(job_name);
-            txtfield_customer.appendText(customer);
-            txtarea_rep.appendText(representative);
-            txtarea_proj_mgr.appendText(project_manager);
-            txtarea_estimator.appendText(estimator);
-            txtarea_job_notes.appendText(job_notes);
-            txtarea_private_notes.appendText(private_notes);
-            txtarea_conflicts.appendText(conflicts);*/
 
             txtfield_job_name.clear();
             txtfield_customer.clear();
@@ -587,14 +510,6 @@ public class client_screen_controller implements Initializable {
             con.close();
 
             //Repopulate text areas with information and an updated message
-/*            txtfield_job_name.setPromptText(job_name);
-            txtfield_customer.appendText(customer);
-            txtarea_rep.appendText(representative);
-            txtarea_proj_mgr.appendText(project_manager);
-            txtarea_estimator.appendText(estimator);
-            txtarea_job_notes.appendText(job_notes);
-            txtarea_private_notes.appendText(private_notes);
-            txtarea_conflicts.appendText(conflicts);*/
 
             job_name_error_text.setText("");
             customer_error_text.setText("");

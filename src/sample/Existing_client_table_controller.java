@@ -109,7 +109,6 @@ public class Existing_client_table_controller {
         //String username = "";
         //String password = "";
         String current_username = Main.current_user.getUsername();
-
         label_users_name.setText(current_username);
 
         col_client.setCellValueFactory(new PropertyValueFactory<ClientProjectThing,

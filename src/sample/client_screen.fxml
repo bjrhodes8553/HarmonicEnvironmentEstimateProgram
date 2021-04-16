@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -15,16 +14,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="649.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.client_screen_controller">
+<AnchorPane prefHeight="649.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.client_screen_controller">
     <children>
-        <TitledPane animated="false" layoutX="325.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="200.0" text="Quote Information">
+        <TitledPane animated="false" layoutX="325.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="368.0" text="Quote Information">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="153.0" prefWidth="205.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="208.0">
                     <children>
                         <GridPane layoutX="19.6" layoutY="29.6" prefHeight="39.0" prefWidth="181.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="168.0" minWidth="10.0" prefWidth="114.00000762939453" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.99999237060547" minWidth="10.0" prefWidth="231.99999237060547" />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -34,9 +33,9 @@
                             </rowConstraints>
                             <children>
                                 <Label text="Quote Type:" />
-                                <ChoiceBox fx:id="choicebox_quote_type" prefWidth="150.0" GridPane.columnIndex="1" />
+                                <ChoiceBox fx:id="choicebox_quote_type" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" />
                                 <Label text="Quote Status:" GridPane.rowIndex="1" />
-                                <ChoiceBox fx:id="choicebox_quote_status" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <ChoiceBox fx:id="choicebox_quote_status" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <Label text="Status Reason:" GridPane.rowIndex="2" />
                                 <TextArea fx:id="txtarea_status_reason" prefHeight="200.0" prefWidth="200.0" promptText="Delayed by Manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <Button fx:id="update_quote" mnemonicParsing="false" onMouseClicked="#update_quote" text="Update" GridPane.columnIndex="0" GridPane.rowIndex="3" />
@@ -148,76 +147,30 @@
                 </AnchorPane>
             </content>
         </TitledPane>
-        <TitledPane animated="false" layoutX="530.0" layoutY="10.0" prefHeight="300.0" prefWidth="165.0" text="Quote Date">
+        <TitledPane animated="false" layoutX="325.0" layoutY="203.0" prefHeight="300.0" prefWidth="368.0" text="Quote Date">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="259.0" prefWidth="163.0">
                     <children>
-                        <Label layoutX="25.0" text="Original Quote Date:" />
-                        <Label fx:id="label_original_quote_date" layoutX="45.0" layoutY="15.0" text="Todays Date">
+                        <Label layoutX="55.0" layoutY="6.0" text="Original Quote Date:" />
+                        <Label fx:id="label_original_quote_date" layoutX="172.0" layoutY="6.0" text="Todays Date">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </Label>
-                        <Label layoutY="30.0" prefHeight="48.0" prefWidth="77.0" text="Last Revision Date:" wrapText="true" />
-                        <Label layoutX="110.0" layoutY="32.0" prefHeight="44.0" prefWidth="50.0" text="Revision #:" textAlignment="CENTER" wrapText="true" />
-                        <DatePicker fx:id="datepicker_revision_date" layoutY="75.0" prefHeight="25.0" prefWidth="101.0" promptText="09/30/2020" />
-                        <TextField fx:id="txtfield_revision_number" layoutX="116.0" layoutY="75.0" prefHeight="25.0" prefWidth="39.0" promptText="21" />
-                        <Button fx:id="button_revision" layoutX="33.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#add_revision" prefHeight="25.0" prefWidth="95.0" scaleX="0.9" scaleY="0.9" text="Revision" />
+                        <Label layoutX="55.0" layoutY="31.0" prefHeight="48.0" prefWidth="77.0" text="Last Revision Date:" wrapText="true" />
+                        <Label layoutX="193.0" layoutY="33.0" prefHeight="44.0" prefWidth="50.0" text="Revision #:" textAlignment="CENTER" wrapText="true" />
+                        <DatePicker fx:id="datepicker_revision_date" layoutX="51.0" layoutY="75.0" prefHeight="25.0" prefWidth="101.0" promptText="09/30/2020" />
+                        <TextField fx:id="txtfield_revision_number" layoutX="199.0" layoutY="75.0" prefHeight="25.0" prefWidth="39.0" promptText="21" />
+                        <Button fx:id="button_revision" layoutX="46.0" layoutY="107.0" mnemonicParsing="false" onMouseClicked="#add_revision" prefHeight="25.0" prefWidth="95.0" scaleX="0.9" scaleY="0.9" text="Revision" />
                         <Label layoutX="50.0" layoutY="144.0" text="Project Due:" />
-                        <TextArea fx:id="txtfield_project_due" layoutX="23.0" layoutY="161.0" prefHeight="27.0" prefWidth="120.0" promptText="12/25/2020" />
-                        <Button fx:id="button_update_due_date" layoutX="23.0" layoutY="214.0" mnemonicParsing="false" onMouseClicked="#update_due_date" scaleX="0.9" scaleY="0.9" text="Update Due Date" />
-                        <Text fx:id="dueDate_update_text" layoutX="40.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Updated" />
+                        <TextArea fx:id="txtfield_project_due" layoutX="50.0" layoutY="161.0" prefHeight="27.0" prefWidth="120.0" promptText="12/25/2020" />
+                        <Button fx:id="button_update_due_date" layoutX="48.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#update_due_date" scaleX="0.9" scaleY="0.9" text="Update Due Date" />
+                        <Text fx:id="dueDate_update_text" layoutX="170.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Updated" />
                     </children>
                 </AnchorPane>
             </content>
         </TitledPane>
-        <TitledPane animated="false" layoutX="324.0" layoutY="198.0" prefHeight="421.0" prefWidth="202.0" text="Shipping">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="200.0">
-                    <children>
-                        <Label layoutY="15.0" text="Estimated Weight:" />
-                        <Label layoutY="50.0" text="Additional Weight:" />
-                        <Label layoutY="95.0" text="Est. Shipping Weight:" />
-                        <Label layoutY="140.0" text="Ship to Zip:" />
-                        <Label layoutY="175.0" prefHeight="39.0" prefWidth="59.0" text="Freight Company:" wrapText="true" />
-                        <Label layoutY="230.0" text="Freight Cost:" />
-                        <Label layoutY="275.0" text="Freight Sell:" />
-                        <Label layoutY="320.0" text="# of Shipments:" />
-                        <Label fx:id="label_estimated_weight" layoutX="145.0" layoutY="15.0" text="560" />
-                        <Label layoutX="175.0" layoutY="15.0" text="lbs" />
-                        <TextField fx:id="txtfield_additional_weight" layoutX="117.0" layoutY="50.0" prefHeight="15.0" prefWidth="57.0" promptText="32">
-                            <font>
-                                <Font size="11.0" />
-                            </font>
-                        </TextField>
-                        <TextField fx:id="txtfield_shipping_zip" layoutX="117.0" layoutY="136.0" prefHeight="25.0" prefWidth="56.0" />
-                        <ChoiceBox fx:id="choicebox_freight_company" layoutX="67.0" layoutY="181.0" prefHeight="25.0" prefWidth="133.0" scaleX="0.9" scaleY="0.9" />
-                        <TextArea fx:id="txtarea_freight_cost" layoutX="85.0" layoutY="220.0" prefHeight="20.0" prefWidth="90.0" promptText="0.00" scaleX="0.8" scaleY="0.8" />
-                        <TextArea fx:id="txtarea_freight_sell" layoutX="85.0" layoutY="273.0" prefHeight="38.0" prefWidth="90.0" promptText="0.00" scaleX="0.8" scaleY="0.8" />
-                        <TextField fx:id="txtfield_num_of_shipments" layoutX="91.0" layoutY="316.0" prefHeight="25.0" prefWidth="40.0" promptText="1" scaleX="0.9" scaleY="0.9" />
-                        <CheckBox fx:id="checkbox_full_truck" layoutX="12.0" layoutY="347.0" mnemonicParsing="false" scaleX="0.9" scaleY="0.9" text="Full Truck" />
-                        <CheckBox fx:id="checkbox_dedicated" layoutX="109.0" layoutY="347.0" mnemonicParsing="false" scaleX="0.9" scaleY="0.9" text="Dedicated" />
-                        <Button fx:id="button_add_weight" layoutX="103.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#add_additional_weight" prefHeight="10.0" prefWidth="87.0" scaleX="0.7" scaleY="0.7" text="Add" />
-                        <Label layoutX="175.0" layoutY="54.0" text="lbs" />
-                        <Label layoutX="85.0" layoutY="231.0" text="\$" />
-                        <Label layoutX="85.0" layoutY="284.0" text="\$" />
-                        <Button fx:id="button_update_shipment" layoutX="46.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#update_shipment" text="Update Shipment" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </TitledPane>
-        <TitledPane animated="false" layoutX="530.0" layoutY="310.0" prefHeight="246.0" prefWidth="165.0" text="Room Specs">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="150.0" prefWidth="163.0">
-                    <children>
-                        <Label layoutY="55.0" text="Size:" />
-                        <ChoiceBox fx:id="choicebox_room_size" prefWidth="100.0"
-                          layoutX="27" layoutY="90"/>
-                    </children>
-                </AnchorPane>
-            </content>
-        </TitledPane>
-        <Button fx:id="btn_go_back" layoutX="571.0" layoutY="569.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
+        <Button fx:id="btn_go_back" layoutX="651.0" layoutY="594.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
         <!--
         <Text fx:id="curr_client_text" layoutX="533.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Client:" wrappingWidth="159.19012451171875" />
