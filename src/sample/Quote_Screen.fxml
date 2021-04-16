@@ -14,11 +14,30 @@
   xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
   fx:controller="sample.Quote_Controller">
   <children>
-    <Label layoutX="20.0" layoutY="11.0" text="Quote">
+    <Label layoutX="20.0" layoutY="11.0" text="Itemized Quote:">
       <font>
         <Font name="System Bold" size="18.0" />
       </font>
     </Label>
+    <Label layoutX="20.0" layoutY="300.0" text="Final Quote:">
+      <font>
+        <Font name="System" size="15.0" />
+      </font>
+    </Label>
+    <Label fx:id="finalQuoteLabel" layoutX="120.0" layoutY="300.0">
+      <font>
+        <Font name="System" size="15.0" />
+      </font>
+    </Label>
+    <TableView fx:id="tblview_final_quote" layoutX="20.0" layoutY="46.0"
+      prefHeight="250.0" prefWidth="350.0">
+      <columns>
+        <TableColumn fx:id="colName" prefWidth="111.0" text="Name" />
+        <TableColumn fx:id="colPrice" prefWidth="82.0" text="Price" />
+        <TableColumn fx:id="colUnit" text="Unit" />
+        <TableColumn fx:id="colQuantity" text="Quantity" />
+      </columns>
+    </TableView>
     <Button fx:id="btn_back" layoutX="526.0" layoutY="360.0" mnemonicParsing="false" text="Back" onMouseClicked="#go_back"/>
   </children>
 </AnchorPane>
