@@ -8,21 +8,21 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client_Materials_Controller">
+<AnchorPane prefHeight="423.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client_Materials_Controller">
    <children>
-      <TableView fx:id="tblview_db_mat" layoutX="36.0" layoutY="39.0" prefHeight="282.0" prefWidth="209.0">
+      <TableView fx:id="tblview_db_mat" layoutX="14.0" layoutY="39.0" prefHeight="282.0" prefWidth="254.0">
         <columns>
-          <TableColumn fx:id="col_db_name" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="col_db_unit" prefWidth="59.0" text="Unit" />
-            <TableColumn fx:id="col_db_price" prefWidth="74.0" text="Price" />
+          <TableColumn fx:id="col_db_name" prefWidth="124.0" text="Name" />
+          <TableColumn fx:id="col_db_unit" prefWidth="56.0" text="Unit" />
+            <TableColumn fx:id="col_db_price" prefWidth="73.0" text="Price" />
         </columns>
       </TableView>
-      <TableView fx:id="tblview_client_mat" layoutX="336.0" layoutY="39.0" prefHeight="282.0" prefWidth="250.0">
+      <TableView fx:id="tblview_client_mat" layoutX="336.0" layoutY="39.0" prefHeight="282.0" prefWidth="310.0">
         <columns>
-          <TableColumn fx:id="col_client_name" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="col_client_unit" prefWidth="53.0" text="Unit" />
-            <TableColumn fx:id="col_client_price" prefWidth="62.0" text="Price" />
-            <TableColumn fx:id="col_material_quantity" prefWidth="59.0" text="Quantity" />
+          <TableColumn fx:id="col_client_name" prefWidth="131.0" text="Name" />
+          <TableColumn fx:id="col_client_unit" prefWidth="56.0" text="Unit" />
+            <TableColumn fx:id="col_client_price" prefWidth="61.0" text="Price" />
+            <TableColumn fx:id="col_material_quantity" prefWidth="61.0" text="Quantity" />
         </columns>
       </TableView>
       <Button fx:id="btn_add_client_mat" layoutX="78.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#add_material_to_client" text="Add to Client Materials" />
