@@ -4,7 +4,7 @@ public class QuoteTableObjectThing {
 
   public QuoteTableObjectThing(String type, String name, Double price,
       String unit,
-      int quantity) {
+      Double quantity) {
     this.name = name;
     this.price = price;
     this.unit = unit;
@@ -15,7 +15,7 @@ public class QuoteTableObjectThing {
   private String name;
   private Double price;
   private String unit;
-  private int quantity;
+  private Double quantity;
   private String type;
 
   public String getType() {
@@ -50,11 +50,11 @@ public class QuoteTableObjectThing {
     this.unit = unit;
   }
 
-  public int getQuantity() {
+  public Double getQuantity() {
     return quantity;
   }
 
-  public void setQuantity(int quantity) {
+  public void setQuantity(Double quantity) {
     this.quantity = quantity;
   }
 }

@@ -33,64 +33,66 @@ public class Quote_Controller implements Initializable {
     ResultSet rs;
     String query;
     double quote = 0;
-    Set<String> namesSet = new HashSet<String>();
+    ArrayList<String> materialNames = new ArrayList<>();
+    ArrayList<Double> materialQuantities = new ArrayList<>();
+    ArrayList<String> laborNames = new ArrayList<>();
+    ArrayList<Double> laborQuantities = new ArrayList<>();
     // Used to pass object to populate_quote_table
     ArrayList<QuoteTableObjectThing> qtot = new ArrayList<>();
 
     // Select names of material within that client's project
     query =
-        "SELECT material_name FROM customer_materials WHERE customer_id = '" + clientID + "'";
+        "SELECT * FROM customer_materials WHERE "
+            + "customer_id = '" + clientID + "'";
     rs = accessor.access_database(query);
-    // Create set (unique, no repeating names) of the names of the materials
+
     while (rs.next()){
-      namesSet.add(rs.getString("material_name"));
+      materialNames.add(rs.getString("material_name"));
+      materialQuantities.add(rs.getDouble("quantity"));
     }
-    // Put these unique names into an array
-    Object[] materialNames = namesSet.toArray();
+
     System.out.println("MATERIALS:");
-    for (int i = 0; i < materialNames.length; i++){
+    for (int i = 0; i < materialNames.size(); i++){
       // Use these unique names to find the price of that material
       query =
-          "SELECT * FROM materials WHERE materialName = '" + materialNames[i].toString() + "'";
+          "SELECT * FROM materials WHERE materialName = '" + materialNames.get(i) + "'";
       rs = accessor.access_database(query);
       // Add the prices to the quote, this will soon be multiplied by
       // quantity (or by hour for labor) once that functionality gets added
       while (rs.next()){
         Double price = rs.getDouble("price");
         String unit = rs.getString("unit");
-        // REPLACE THIS WITH THE ACTUAL QUANTITY
-        int quantity = 1;
-        System.out.println(rs.getString("materialName") + " = $" + rs.getString("price") + " (x1)");
-        quote += rs.getDouble("price");
+        Double quantity = materialQuantities.get(i);
+        System.out.println(rs.getString("materialName") + " = $" + rs.getString("price") + " x" + quantity);
+        quote += price * quantity;
         // Create obj and add to arraylist so it can be used in
         // populate_quote_table
         qtot.add(new QuoteTableObjectThing("Material",
-            materialNames[i].toString(), price, unit,
+            materialNames.get(i), price, unit,
             quantity));
       }
     }
 
     // Same this as above, but for labor
     query =
-        "SELECT labor_name FROM customer_labor WHERE customer_id = '" + clientID + "'";
+        "SELECT * FROM customer_labor WHERE customer_id = '" + clientID + "'";
     rs = accessor.access_database(query);
     while (rs.next()){
-      namesSet.add(rs.getString("labor_name"));
+      laborNames.add(rs.getString("labor_name"));
+      laborQuantities.add(rs.getDouble("quantity"));
     }
-    Object[] laborNames = namesSet.toArray();
     System.out.println("\nLABOR:");
-    for (int i = 0; i < laborNames.length; i++){
+    for (int i = 0; i < laborNames.size(); i++){
       query =
-          "SELECT * FROM labor WHERE laborName = '" + laborNames[i].toString() + "'";
+          "SELECT * FROM labor WHERE laborName = '" + laborNames.get(i) + "'";
       rs = accessor.access_database(query);
       while (rs.next()){
         Double price = rs.getDouble("price_per_hour");
         String unit = "per hour";
-        // REPLACE THIS WITH THE ACTUAL QUANTITY
-        int quantity = 1;
-        System.out.println(rs.getString("laborName") + " = $" + price + " (x1)");
-        quote += price;
-        qtot.add(new QuoteTableObjectThing("Labor", laborNames[i].toString(),
+        Double quantity = laborQuantities.get(i);
+        System.out.println(rs.getString("laborName") + " = $" + price + " x" + quantity);
+        quote += price * quantity;
+        qtot.add(new QuoteTableObjectThing("Labor", laborNames.get(i),
             price, unit, quantity));
       }
     }
