@@ -64,7 +64,8 @@ public class Quote_Controller implements Initializable {
         quote += rs.getDouble("price");
         // Create obj and add to arraylist so it can be used in
         // populate_quote_table
-        qtot.add(new QuoteTableObjectThing(materialNames[i].toString(), price, unit,
+        qtot.add(new QuoteTableObjectThing("Material",
+            materialNames[i].toString(), price, unit,
             quantity));
       }
     }
@@ -89,8 +90,8 @@ public class Quote_Controller implements Initializable {
         int quantity = 1;
         System.out.println(rs.getString("laborName") + " = $" + price + " (x1)");
         quote += price;
-        qtot.add(new QuoteTableObjectThing(laborNames[i].toString(), price, unit,
-            quantity));
+        qtot.add(new QuoteTableObjectThing("Labor", laborNames[i].toString(),
+            price, unit, quantity));
       }
     }
 
@@ -104,6 +105,8 @@ public class Quote_Controller implements Initializable {
   @FXML
   TableView<QuoteTableObjectThing> tblview_final_quote;
   @FXML
+  javafx.scene.control.TableColumn<?, ?> colType;
+  @FXML
   javafx.scene.control.TableColumn<?, ?> colName;
   @FXML
   javafx.scene.control.TableColumn<?, ?> colPrice;
@@ -112,6 +115,7 @@ public class Quote_Controller implements Initializable {
   @FXML
   javafx.scene.control.TableColumn<?, ?> colQuantity;
   void populate_quote_table(ArrayList<QuoteTableObjectThing> arrayList){
+    colType.setCellValueFactory(new PropertyValueFactory<>("type"));
     colName.setCellValueFactory(new PropertyValueFactory<>("name"));
     colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     colUnit.setCellValueFactory(new PropertyValueFactory<>("unit"));

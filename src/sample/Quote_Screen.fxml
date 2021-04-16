@@ -30,8 +30,9 @@
       </font>
     </Label>
     <TableView fx:id="tblview_final_quote" layoutX="20.0" layoutY="46.0"
-      prefHeight="250.0" prefWidth="350.0">
+      prefHeight="250.0" prefWidth="385.0">
       <columns>
+        <TableColumn fx:id="colType" text="Type" />
         <TableColumn fx:id="colName" prefWidth="111.0" text="Name" />
         <TableColumn fx:id="colPrice" prefWidth="82.0" text="Price" />
         <TableColumn fx:id="colUnit" text="Unit" />
