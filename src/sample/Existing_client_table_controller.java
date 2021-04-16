@@ -141,6 +141,7 @@ public class Existing_client_table_controller {
         String projectName = "", customer = "", representative = "",
             projectManager = "", estimator = "", jobNotes = "",
             privateNotes = "", conflicts = "";
+
         Harmonic_Client current_client = new Harmonic_Client(clientID,
             projectName, customer,
             representative, projectManager, estimator, jobNotes,
@@ -148,6 +149,44 @@ public class Existing_client_table_controller {
         Main.current_client = current_client;
         System.out.println("Going to new client...");
         Main.createNewScene(event, "client_screen.fxml");
+    }
+
+    @FXML
+    void go_to_quote(MouseEvent event) throws SQLException {
+      ClientProjectThing cpt = tblview_client.getSelectionModel().getSelectedItem();
+      Database_Accessor accessor = new Database_Accessor();
+      String query = "SELECT * FROM "
+          + "harmonic_client WHERE customer = '" + cpt.getClient() + "' AND "
+          + "project_name = '" + cpt.getProject() + "'";
+      int clientID = 0;
+      String projectName = "", customer = "", representative = "",
+          projectManager = "", estimator = "", jobNotes = "",
+          privateNotes = "", conflicts = "";
+
+      System.out.println("Client: " + cpt.getClient());
+      System.out.println("Project: " + cpt.getProject());
+      System.out.println("Query: " + query);
+      ResultSet rs = accessor.access_database(query);
+      System.out.println(rs);
+      while (rs.next()){
+        clientID = rs.getInt("client_id");
+        projectName = rs.getString("project_name");
+        customer = rs.getString("customer");
+        representative = rs.getString("representative");
+        projectManager = rs.getString("project_manager");
+        estimator = rs.getString("estimator");
+        jobNotes = rs.getString("job_notes");
+        privateNotes = rs.getString("private_notes");
+        conflicts = rs.getString("conflicts");
+      }
+      Harmonic_Client current_client = new Harmonic_Client(clientID,
+          projectName, customer,
+          representative, projectManager, estimator, jobNotes,
+          privateNotes, conflicts);
+      Main.current_client = current_client;
+      System.out.println("Getting quote for client " + customer +
+          "...");
+        Main.createNewScene(event, "Quote_Screen.fxml");
     }
 
     /*
