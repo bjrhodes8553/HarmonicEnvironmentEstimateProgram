@@ -4,15 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0"
-  xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-  fx:controller="sample.Quote_Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Quote_Controller">
   <children>
     <Label layoutX="20.0" layoutY="11.0" text="Itemized Quote:">
       <font>
@@ -29,8 +24,7 @@
         <Font name="System" size="15.0" />
       </font>
     </Label>
-    <TableView fx:id="tblview_final_quote" layoutX="20.0" layoutY="46.0"
-      prefHeight="250.0" prefWidth="385.0">
+    <TableView fx:id="tblview_final_quote" layoutX="20.0" layoutY="46.0" prefHeight="250.0" prefWidth="434.0">
       <columns>
         <TableColumn fx:id="colType" text="Type" />
         <TableColumn fx:id="colName" prefWidth="111.0" text="Name" />
@@ -39,6 +33,7 @@
         <TableColumn fx:id="colQuantity" text="Quantity" />
       </columns>
     </TableView>
-    <Button fx:id="btn_back" layoutX="526.0" layoutY="360.0" mnemonicParsing="false" text="Back" onMouseClicked="#go_back"/>
+    <Button fx:id="btn_back" layoutX="526.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#go_back" text="Back" />
+      <Button fx:id="btn_export_file" layoutX="20.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#save_file" text="Export to File" />
   </children>
 </AnchorPane>

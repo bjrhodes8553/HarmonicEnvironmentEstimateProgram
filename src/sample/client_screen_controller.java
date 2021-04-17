@@ -30,7 +30,7 @@ public class client_screen_controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         choicebox_quote_type.setItems(FXCollections.observableArrayList(
-            "Type A", "Type B", "Type C"
+            "Fabrication"
         ));
         choicebox_quote_status.setItems(FXCollections.observableArrayList(
             "On Time", "Delayed", "Ahead of Time", "Pending"
