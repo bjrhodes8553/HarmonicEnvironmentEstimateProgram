@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="649.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.client_screen_controller">
+<AnchorPane prefHeight="649.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.client_screen_controller">
     <children>
         <TitledPane animated="false" layoutX="325.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="368.0" text="Quote Information">
             <content>
@@ -165,7 +165,7 @@
                         <Label layoutX="50.0" layoutY="144.0" text="Project Due:" />
                         <TextArea fx:id="txtfield_project_due" layoutX="50.0" layoutY="161.0" prefHeight="27.0" prefWidth="120.0" promptText="12/25/2020" />
                         <Button fx:id="button_update_due_date" layoutX="48.0" layoutY="211.0" mnemonicParsing="false" onMouseClicked="#update_due_date" scaleX="0.9" scaleY="0.9" text="Update Due Date" />
-                        <Text fx:id="dueDate_update_text" layoutX="170.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Updated" />
+                        <Text fx:id="dueDate_update_text" layoutX="170.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" />
                     </children>
                 </AnchorPane>
             </content>
