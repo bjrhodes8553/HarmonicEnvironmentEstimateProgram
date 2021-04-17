@@ -22,7 +22,7 @@
                     </columns>
                   </TableView>
                   <Button fx:id="button_go_to_account" layoutX="20.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#go_to_account" text="Go to Account" />
-                 <Button fx:id="button_get_quote" layoutX="128.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#go_to_quote" text="View Quote" />
+                 <Button fx:id="button_add_new_client" layoutX="168.0" layoutY="269.0" mnemonicParsing="false" onMouseClicked="#go_to_new_client" text="New Client" />
                </children>
             </AnchorPane>
         </content>
@@ -37,11 +37,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TitledPane animated="false" layoutX="14.0" layoutY="399.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="131.0" prefWidth="257.0" text="Create a New Client">
+      <TitledPane animated="false" layoutX="14.0" layoutY="399.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="131.0" prefWidth="257.0" text="Get Quote">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                 <Button fx:id="button_add_new_client" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#go_to_new_client" text="New Client" />
+                 <Button fx:id="button_get_quote" layoutX="89.0" layoutY="28.0" mnemonicParsing="false" onMouseClicked="#go_to_quote" text="View Quote" />
                </children>
             </AnchorPane>
         </content>
