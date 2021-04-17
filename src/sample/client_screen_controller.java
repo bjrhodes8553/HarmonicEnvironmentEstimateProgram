@@ -576,20 +576,25 @@ public class client_screen_controller implements Initializable {
     @FXML
     void update_due_date(MouseEvent event) {
 
-        String new_due_date = txtfield_project_due.getText();
+        if(txtfield_project_due.getText().equals("")){
+            dueDate_update_text.setText("Please Enter Due Date");
+        }else {
+            String new_due_date = txtfield_project_due.getText();
+            dueDate_update_text.setText("Date Updated");
 
-        try {
+            try {
 
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
-            pst = con.prepareStatement("UPDATE project set " +
-                    "due_date = ? WHERE client_id =?");
-            pst.setString(1, new_due_date);
-            pst.setInt(2, 1);
-            pst.executeUpdate();
+                Class.forName("com.mysql.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/harmonic_environment", "root", "");
+                pst = con.prepareStatement("UPDATE project set " +
+                        "due_date = ? WHERE client_id =?");
+                pst.setString(1, new_due_date);
+                pst.setInt(2, 1);
+                pst.executeUpdate();
 
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
         }
     }
 
