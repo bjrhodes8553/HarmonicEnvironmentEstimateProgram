@@ -57,4 +57,13 @@ public class QuoteTableObjectThing {
   public void setQuantity(Double quantity) {
     this.quantity = quantity;
   }
+
+  @Override
+  public String toString(){
+    return "Name: " + name + "\n"
+        + "Type: " + type + "\n"
+        + "Price: $" + price + "\n"
+        + "Quantity: " + quantity + "\n"
+        + "Unit: " + unit;
+  }
 }

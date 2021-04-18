@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +39,10 @@ public class Quote_Controller implements Initializable {
 
   // Used to pass object to populate_quote_table
   ArrayList<QuoteTableObjectThing> qtot = new ArrayList<>();
+  ArrayList<String> materialNames = new ArrayList<>();
+  ArrayList<Double> materialQuantities = new ArrayList<>();
+  ArrayList<String> laborNames = new ArrayList<>();
+  ArrayList<Double> laborQuantities = new ArrayList<>();
 
   public void calculateQuote() throws SQLException {
     int clientID = Main.current_client.getClient_id();
@@ -45,10 +50,7 @@ public class Quote_Controller implements Initializable {
     ResultSet rs;
     String query;
     double quote = 0;
-    ArrayList<String> materialNames = new ArrayList<>();
-    ArrayList<Double> materialQuantities = new ArrayList<>();
-    ArrayList<String> laborNames = new ArrayList<>();
-    ArrayList<Double> laborQuantities = new ArrayList<>();
+
 
     // Select names of material within that client's project
     query =
@@ -144,7 +146,7 @@ public class Quote_Controller implements Initializable {
   private Button btn_export_file;
 
   @FXML
-  void save_file(MouseEvent event) {
+  void save_file(MouseEvent event) throws IOException {
     //Set extension filter for text files
     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
         "TXT files (*.txt)", "*.txt");
@@ -155,23 +157,21 @@ public class Quote_Controller implements Initializable {
     Node node = (Node) event.getSource();
     File new_file = fileChooser.showSaveDialog(node.getScene().getWindow());
 
+
+    System.out.println(qtot);
+
     if(new_file != null){
-      SaveFile(tblview_final_quote.getItems(), new_file);
+      SaveFile(tblview_final_quote.getItems().toString(), new_file);
     }
 
   }
 
-  private void SaveFile(ObservableList<QuoteTableObjectThing> content, File file){
-    try {
+  private void SaveFile(String content, File file)
+      throws IOException {
       FileWriter fileWriter;
 
       fileWriter = new FileWriter(file);
-      for (QuoteTableObjectThing i : content) {
-        fileWriter.write(i.toString());
-      }
+      fileWriter.write(content);
       fileWriter.close();
-    } catch (IOException ex) {
-      System.out.println(ex);
-    }
   }
 }
